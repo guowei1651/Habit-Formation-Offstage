@@ -9,28 +9,20 @@ import (
 	"github.com/go-openapi/spec"
 )
 
+type WebServer struct {}
+
 type ResponseBody struct {
 	Code int `json:"code"`
 	Message string `json:"message"`
 	Data interface{} `json:"data"`
 }
 
-func (ci CarouselItemResource) WebService() *restful.WebService {
+func (webServer WebServer) WebService() *restful.WebService {
 	ws := new(restful.WebService)
 	ws.
 		Path("/carousel").
 		Consumes(restful.MIME_JSON).
 		Produces(restful.MIME_JSON) // you can specify this per route as well
-
-	tags := []string{"carouselItems"}
-
-	ws.Route(ws.GET("{id}/carouselItems").To(ci.findAllCarouselItemsByCarouseId).
-		// docs
-		Doc("get all carousel items in carousel").
-		Param(ws.PathParameter("id", "identifier of the Carousel").DataType("integer").DefaultValue("1")).
-		Metadata(restfulspec.KeyOpenAPITags, tags).
-		Writes([]CarouselItem{}).
-		Returns(200, "OK", []CarouselItem{}))
 
 	return ws
 }
@@ -62,7 +54,7 @@ func enrichSwaggerObject(swo *spec.Swagger) {
 }
 
 func openServer() {
-	u := CarouselItemResource{map[string]CarouselItem{}}
+	u := CarouselItemResource{}
 	restful.DefaultContainer.Add(u.WebService())
 
 	config := restfulspec.Config{

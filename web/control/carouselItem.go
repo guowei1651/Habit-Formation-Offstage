@@ -19,6 +19,18 @@ type WEBResource struct {
 
 }
 
+func aa () {
+	tags := []string{"carouselItems"}
+
+	ws.Route(ws.GET("{id}/carouselItems").To(webServer.findAllCarouselItemsByCarouseId).
+		// docs
+		Doc("get all carousel items in carousel").
+		Param(ws.PathParameter("id", "identifier of the Carousel").DataType("integer").DefaultValue("1")).
+		Metadata(restfulspec.KeyOpenAPITags, tags).
+		Writes(ResponseBody{}).
+		Returns(200, "OK", ResponseBody{}))
+}
+
 func (ci CarouselItemResource) findAllCarouselItemsByCarouseId(request *restful.Request, response *restful.Response) {
 	id,_ := strconv.Atoi(request.PathParameter("id"))
 	if id == 0 {

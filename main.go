@@ -12,6 +12,6 @@ func main() {
 
 	db.init()
 
-	web.Init()
-	device.Init()
+	web.openServer()
+	device.openServer()
 }
