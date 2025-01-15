@@ -37,7 +37,7 @@ func ParseConfig() {
 		os.Exit(1)
 	}
 
-	if err := config.loadData(); err != nil {
+	if err := Config.loadData(); err != nil {
 		log.Fatal(err)
 		os.Exit(1)
 	}
