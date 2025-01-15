@@ -8,7 +8,7 @@ import (
 )
 
 type DB interface {
-	DBConnectPool *sql.DB
+	DBConnectPool &sql.DB
 	connectPing()
 	connectOpen()
 }
