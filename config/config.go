@@ -9,7 +9,7 @@ import (
 )
 
 type DBConfig struct {
-	Schmea			string	`json:"schema" description:"database type" default:"postgres"`
+	Schema			string	`json:"schema" description:"database type" default:"postgres"`
 	Host			string	`json:"host" description:"database host" default:"172.25.1.22"`
 	Port			int		`json:"port" description:"database port" default:"5432"`
 	UserName		string	`json:"username" description:"database username" default:"habitformation"`

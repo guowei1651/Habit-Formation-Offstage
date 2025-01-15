@@ -6,6 +6,9 @@ import (
     "log"
     "time"
     "context"
+
+    hfConfig "hf/config"
+
     "database/sql"
     _ "github.com/lib/pq"
 )
@@ -33,7 +36,13 @@ func (p *Postgres) ConnectPing() {
 func (p *Postgres) ConnectOpen() {
     log.Printf("开始打开Postgres链接")
     var err error
-    p.Pool, err = sql.Open("postgres", "host=172.25.1.22 port=5432 user=appsmith password=appsmith dbname=appsmith sslmode=disable")
+
+
+    dbConfig := hfConfig.Config.DBConfig.Schema
+
+    connectStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", 
+        dbConfig.Host, dbConfig.Port, dbConfig.UserName, dbConfig.Password, dbConfig.DBName, dbConfig.SSLMode)
+    p.Pool, err = sql.Open(dbConfig.Schema, connectStr)
     // db, err = sql.Open("postgres", "postgres://appsmith:appsmith@172.25.1.22:5432/appsmith?sslmode=disable")
     if err != nil {
         log.Fatal("open db connect fail -> ", err)
@@ -41,8 +50,8 @@ func (p *Postgres) ConnectOpen() {
     }
     p.Pool.SetConnMaxIdleTime(30*1000)
     p.Pool.SetConnMaxLifetime(10*1000)
-    p.Pool.SetMaxIdleConns(10)
-    p.Pool.SetMaxOpenConns(20)
+    p.Pool.SetMaxIdleConns(dbConfig.MaxIdleConns)
+    p.Pool.SetMaxOpenConns(dbConfig.MaxOpenConns)
 
     log.Printf("链接已经打开，链接池信息: -> ", p.Pool)
     log.Printf("打开Postgres链接完成")
