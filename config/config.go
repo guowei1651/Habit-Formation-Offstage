@@ -2,8 +2,8 @@
 package config
 
 import (
+	"log"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 )
@@ -37,7 +37,7 @@ func (config *Configuration) loadData() error {
 
 	// 最好要处理以下错误
 	if err != nil {
-		fmt.Printf("加载配置文件%v失败, err: %v\n", config.ConfigFile, err)
+		log.Printf("加载配置文件%v失败, err: %v\n", config.ConfigFile, err)
 		return err
 	}
 
@@ -48,7 +48,7 @@ func (config *Configuration) loadData() error {
 
 	err = json.Unmarshal(byteValue, &config)
 	if err != nil {
-		fmt.Printf("配置文件解析为Json报错, err: %v\n", err)
+		log.Printf("配置文件解析为Json报错, err: %v\n", err)
 		return err
 	}
 
