@@ -10,7 +10,7 @@ import (
 func main() {
 	config.ParseConfig()
 
-	db.init()
+	db.openConnectPool()
 
 	web.openServer()
 	device.openServer()
