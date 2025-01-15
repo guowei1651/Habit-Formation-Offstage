@@ -30,6 +30,8 @@ type Configuration struct {
 	WEBConfig WEBConfig `json:"web" description:"web server config" default:"{}"`
 }
 
+var config *Configuration
+
 func (config *Configuration) loadData() error {
 	log.Printf("解析配置文件开始")
 	// 打开json文件
@@ -52,7 +54,7 @@ func (config *Configuration) loadData() error {
 		return err
 	}
 
-	log.Printf("解析配置文件结束，配置数据为:%s", json.MarshalIndent(data, "", " "))
+	log.Printf("解析配置文件结束，配置数据为:%s", json.MarshalIndent(config, "", " "))
 	return err
 }
 
