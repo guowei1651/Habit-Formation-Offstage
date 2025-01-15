@@ -1,16 +1,16 @@
 package main
 
 import (
-	config "hf/config"
-	db "hf/database"
-	web "hf/web"
-	device "hf/device"
+	"hf/config"
+	"hf/database"
+	"hf/web"
+	"hf/device"
 )
 
 func main() {
 	config.ParseConfig()
 
-	db.openConnectPool()
+	database.openConnectPool()
 
 	web.openServer()
 	device.openServer()
