@@ -9,8 +9,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var config *Configuration
-
 func runHelp(cmd *cobra.Command, args []string) {
 	cmd.Help()
 }
