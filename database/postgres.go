@@ -35,15 +35,16 @@ func (p Postgres) ConnectOpen() {
     var err error
     p.db, err = sql.Open("postgres", "host=172.25.1.22 port=5432 user=appsmith password=appsmith dbname=appsmith sslmode=disable")
     // db, err = sql.Open("postgres", "postgres://appsmith:appsmith@172.25.1.22:5432/appsmith?sslmode=disable")
-    log.Printf("open db complete -> ", p.db)
-    p.db.SetConnMaxIdleTime(30*1000)
-    p.db.SetConnMaxLifetime(10*1000)
-    p.db.SetMaxIdleConns(10)
-    p.db.SetMaxOpenConns(20)
     if err != nil {
         log.Fatal("open db connect fail -> ", err)
         panic(err)
     }
+    p.db.SetConnMaxIdleTime(30*1000)
+    p.db.SetConnMaxLifetime(10*1000)
+    p.db.SetMaxIdleConns(10)
+    p.db.SetMaxOpenConns(20)
+
+    log.Printf("open db complete -> ", p.db)
     log.Printf("打开Postgres链接完成")
 }
 
