@@ -84,6 +84,6 @@ func openServer() {
 
 	log.Printf("Get the API using http://xxx/apidocs.json")
 	log.Printf("Open Swagger UI using http://xxx/apidocs/?url=http://xxx/apidocs.json")
-	portStr := fmt.Sprintf(":%d", config.web.port)
+	portStr := fmt.Sprintf(":%d", config.WEBConfig.Port)
 	log.Fatal(http.ListenAndServe(portStr, nil))
 }
