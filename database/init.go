@@ -23,7 +23,7 @@ func OpenConnectPool () {
 	} else if (hfConfig.Config.DBConfig.Schmea == "mysql") {
 		pool = &Mysql{}
 	} else {
-		throw new Error("配置schema配置不支持")
+		panic("配置schema配置不支持")
 	}
 	
 	pool.connectOpen()
