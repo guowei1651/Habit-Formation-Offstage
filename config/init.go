@@ -29,7 +29,7 @@ func initCommand() *cobra.Command {
 	return rootCmd
 }
 
-func (* Configuration) parseConfig() {
+func parseConfig() {
 	config = &Configuration{}
 
 	var rootCmd = initCommand()
