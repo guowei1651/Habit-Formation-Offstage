@@ -12,6 +12,6 @@ func main() {
 
 	database.OpenConnectPool()
 
-	web.OpenServer()
-	device.OpenServer()
+	go web.OpenServer()
+	go device.OpenServer()
 }
