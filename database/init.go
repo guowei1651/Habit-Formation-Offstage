@@ -18,7 +18,7 @@ var DBConnectPool *sql.DB
 func OpenConnectPool () {
 	log.Printf("开始创建数据库连接")
 	log.Printf("数据库配置参数:%v", hfConfig.Config)
-	var pool *DBProcess
+	var pool DBProcess
 	if (hfConfig.Config.DBConfig.Schmea == "postgres") {
 		pool = &Postgres{}
 	} else if (hfConfig.Config.DBConfig.Schmea == "mysql") {
