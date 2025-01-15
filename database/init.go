@@ -18,11 +18,12 @@ func OpenConnectPool () {
 	log.Printf("开始创建数据库连接")
 	log.Printf("数据库配置参数:%v", hfConfig.Config)
 	var pool *DB
-	if (hfConfig.Config.DBConfig.schmea == "postgres") {
+	if (hfConfig.Config.DBConfig.Schmea == "postgres") {
 		pool = &Postgres{}
-	}
-	if (hfConfig.Config.DBConfig.schmea == "mysql") {
+	} else if (hfConfig.Config.DBConfig.Schmea == "mysql") {
 		pool = &Mysql{}
+	} else {
+		throw new Error("配置schema配置不支持")
 	}
 	
 	pool.connectOpen()

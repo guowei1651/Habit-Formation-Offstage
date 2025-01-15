@@ -2,6 +2,8 @@ package database
 
 import (
     "log"
+
+	"database/sql"
 )
 
 type Mysql struct {
