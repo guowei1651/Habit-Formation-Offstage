@@ -30,7 +30,7 @@ type Configuration struct {
 	WEBConfig WEBConfig `json:"web" description:"web server config" default:"{}"`
 }
 
-var config *Configuration
+var Config *Configuration
 
 func (config *Configuration) loadData() error {
 	log.Printf("解析配置文件开始")

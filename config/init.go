@@ -10,7 +10,7 @@ import (
 )
 
 func runHelp(cmd *cobra.Command, args []string) {
-	cmd.Help()
+	// cmd.Help()
 }
 
 func initCommand() *cobra.Command {
@@ -18,18 +18,18 @@ func initCommand() *cobra.Command {
 		Use:   "hf",
 		Short: "hf is habit formation",
 		Long:  `hf is a habit formation offspring of the habit formation project`,
-		// Run: runHelp,
+		Run: runHelp,
 	}
 
 	flags := rootCmd.Flags()
-	flags.StringVar(&config.ConfigFile, "config", "./hf.json", "配置文件")
+	flags.StringVar(&Config.ConfigFile, "config", "./hf.json", "配置文件")
 
 	return rootCmd
 }
 
 func ParseConfig() {
 	log.Printf("开始解析配置")
-	config = &Configuration{}
+	Config = &Configuration{}
 
 	var rootCmd = initCommand()
 	if err := rootCmd.Execute(); err != nil {

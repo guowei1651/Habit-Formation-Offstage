@@ -8,7 +8,7 @@ import (
 func OpenConnectPool () {
 	log.Printf("开始创建数据库连接")
 
-	log.Printf("数据库配置参数:%v", hfConfig.config)
+	log.Printf("数据库配置参数:%v", hfConfig.Config)
 	sqlOpen()
 
 	log.Printf("创建数据库连接结束")
