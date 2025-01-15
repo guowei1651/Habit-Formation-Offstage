@@ -10,15 +10,15 @@ type Mysql struct {
     db *sql.DB
 }
 
-func (m Mysql) connectPing() {
+func (m Mysql) ConnectPing() {
 	log.Printf("未实现")
 }
 
-func (m Mysql) connectOpen() {
+func (m Mysql) ConnectOpen() {
 	log.Printf("未实现")
 }
 
-func (m Mysql) getPool () (*sql.DB){
+func (m Mysql) GetPool() (*sql.DB){
 	log.Printf("未实现")
 	panic("未实现")
 }

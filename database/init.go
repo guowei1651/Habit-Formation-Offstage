@@ -8,9 +8,9 @@ import (
 )
 
 type DB interface {
-	connectPing()
-	connectOpen()
-	getPool() *sql.DB
+	ConnectPing()
+	ConnectOpen()
+	GetPool() *sql.DB
 }
 
 var DBConnectPool *sql.DB
@@ -27,11 +27,11 @@ func OpenConnectPool () {
 		panic("配置schema配置不支持")
 	}
 	
-	pool.connectOpen()
+	pool.ConnectOpen()
 
-	pool.connectPing()
+	pool.ConnectPing()
 
-	DBConnectPool = pool.getPool()
+	DBConnectPool = pool.GetPool()
 
 	log.Printf("创建数据库连接结束")
 }

@@ -14,7 +14,7 @@ type Postgres struct {
     db *sql.DB
 }
 
-func (p Postgres) connectPing() {
+func (p Postgres) ConnectPing() {
     ctx, stop := context.WithCancel(context.Background())
     defer stop()
 
@@ -28,7 +28,7 @@ func (p Postgres) connectPing() {
 	}
 }
 
-func (p Postgres) connectOpen() {
+func (p Postgres) ConnectOpen() {
     log.Printf("开始打开Postgres链接")
     var err error
     p.db, err = sql.Open("postgres", "host=172.25.1.22 port=5432 user=appsmith password=appsmith dbname=appsmith sslmode=disable")
@@ -45,6 +45,6 @@ func (p Postgres) connectOpen() {
     log.Printf("打开Postgres链接完成")
 }
 
-func (p Postgres) getPool () {
+func (p Postgres) GetPool() (*sql.DB) {
     return p.db
 }
