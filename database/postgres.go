@@ -7,7 +7,7 @@ import (
     "time"
     "context"
     "database/sql"
-	_ "github.com/lib/pq"
+    _ "github.com/lib/pq"
 )
 
 type Postgres struct {
@@ -45,6 +45,6 @@ func (p Postgres) ConnectOpen() {
     log.Printf("打开Postgres链接完成")
 }
 
-func (p Postgres) GetPool() (*sql.DB) {
+func (p Postgres) GetPool() (db *sql.DB) {
     return p.db
 }

@@ -10,7 +10,7 @@ import (
 type DB interface {
 	ConnectPing()
 	ConnectOpen()
-	GetPool() *sql.DB
+	GetPool() (db *sql.DB)
 }
 
 var DBConnectPool *sql.DB
