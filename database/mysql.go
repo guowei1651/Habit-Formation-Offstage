@@ -17,3 +17,8 @@ func (m Mysql) connectPing() {
 func (m Mysql) connectOpen() {
 	log.Printf("未实现")
 }
+
+func (p Postgres) getPool () (*sql.DB){
+	log.Printf("未实现")
+	panic("未实现")
+}

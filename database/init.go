@@ -8,9 +8,9 @@ import (
 )
 
 type DB interface {
-	DBConnectPool &sql.DB
 	connectPing()
 	connectOpen()
+	getPool() (*sql.DB)
 }
 
 var DBConnectPool *sql.DB
@@ -30,6 +30,8 @@ func OpenConnectPool () {
 	pool.connectOpen()
 
 	pool.connectPing()
+
+	DBConnectPool = pool.getPool()
 
 	log.Printf("创建数据库连接结束")
 }
