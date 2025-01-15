@@ -6,8 +6,6 @@ import (
 	"log"
 	"os"
 
-	"json"
-
 	"github.com/spf13/cobra"
 )
 
