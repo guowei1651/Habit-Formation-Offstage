@@ -38,8 +38,8 @@ func (p *Postgres) ConnectOpen() {
     log.Printf("开始打开Postgres链接")
     var err error
 
-
-    dbConfig := hfConfig.Config.DBConfig.Schema
+    var dbConfig hfConfig.DBConfig
+    dbConfig = hfConfig.Config.DBConfig.Schema
 
     connectStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", 
         dbConfig.Host, dbConfig.Port, dbConfig.UserName, dbConfig.Password, dbConfig.DBName, dbConfig.SSLMode)
