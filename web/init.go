@@ -12,6 +12,9 @@ import (
 	"github.com/go-openapi/spec"
 )
 
+
+var config *hfConfig.Configuration
+
 type WebServer struct {}
 
 type ResponseBody struct {
@@ -81,6 +84,6 @@ func openServer() {
 
 	log.Printf("Get the API using http://xxx/apidocs.json")
 	log.Printf("Open Swagger UI using http://xxx/apidocs/?url=http://xxx/apidocs.json")
-	portStr := fmt.Sprintf(":%d", hfConfig.config.web.port)
+	portStr := fmt.Sprintf(":%d", config.web.port)
 	log.Fatal(http.ListenAndServe(portStr, nil))
 }
