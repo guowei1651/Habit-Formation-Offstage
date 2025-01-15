@@ -21,7 +21,7 @@ func (p Postgres) connectPing() {
 	ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
 	defer cancel()
 
-	log.Printf("db ping db-> ", db)
+	log.Printf("db ping db-> ", p.db)
 	if err := p.db.PingContext(ctx); err != nil {
 		log.Fatalf("unable to connect to database: %v", err)
         panic(err)
@@ -33,7 +33,7 @@ func (p Postgres) connectOpen() {
     var err error
     p.db, err = sql.Open("postgres", "host=172.25.1.22 port=5432 user=appsmith password=appsmith dbname=appsmith sslmode=disable")
     // db, err = sql.Open("postgres", "postgres://appsmith:appsmith@172.25.1.22:5432/appsmith?sslmode=disable")
-    log.Printf("open db complete -> ", db)
+    log.Printf("open db complete -> ", p.db)
     p.db.SetConnMaxIdleTime(30*1000)
     p.db.SetConnMaxLifetime(10*1000)
     p.db.SetMaxIdleConns(10)
