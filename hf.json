@@ -3,7 +3,7 @@
         "schema" : "postgres",
         "host" : "172.25.1.22",
         "port" : 5432,
-        "user" : "appsmith",
+        "username" : "appsmith",
         "password" : "appsmith",
         "dbname" : "appsmith",
         "sslmode" : "disable"
