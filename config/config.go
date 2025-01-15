@@ -54,7 +54,8 @@ func (config *Configuration) loadData() error {
 		return err
 	}
 
-	log.Printf("解析配置文件结束，配置数据为:%s", json.MarshalIndent(config, "", " "))
+	json.MarshalIndent(config, "", " ")
+	log.Printf("解析配置文件结束，配置数据为: %v", config)
 	return err
 }
 
