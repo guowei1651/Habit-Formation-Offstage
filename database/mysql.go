@@ -7,7 +7,7 @@ import (
 )
 
 type Mysql struct {
-    db *sql.DB
+    DBConnectPool *sql.DB
 }
 
 func (m Mysql) connectPing() {
