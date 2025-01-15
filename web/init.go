@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 
+	hfConfig "hf/config"
+
 	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 	restful "github.com/emicklei/go-restful/v3"
 	"github.com/go-openapi/spec"
@@ -54,14 +56,14 @@ func enrichSwaggerObject(swo *spec.Swagger) {
 }
 
 func openServer() {
-	u := CarouselItemResource{}
-	restful.DefaultContainer.Add(u.WebService())
+	webServer := WebServer{}
+	restful.DefaultContainer.Add(webServer.WebService())
 
-	config := restfulspec.Config{
+	restConfig := restfulspec.Config{
 		WebServices:                   restful.RegisteredWebServices(), // you control what services are visible
 		APIPath:                       "/apidocs.json",
 		PostBuildSwaggerObjectHandler: enrichSwaggerObject}
-	restful.DefaultContainer.Add(restfulspec.NewOpenAPIService(config))
+	restful.DefaultContainer.Add(restfulspec.NewOpenAPIService(restConfig))
 
 	// Optionally, you can install the Swagger Service which provides a nice Web UI on your REST API
 	// You need to download the Swagger HTML5 assets and change the FilePath location in the config below.
@@ -78,5 +80,6 @@ func openServer() {
 
 	log.Printf("Get the API using http://xxx/apidocs.json")
 	log.Printf("Open Swagger UI using http://xxx/apidocs/?url=http://xxx/apidocs.json")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	portStr := fmt.Sprintf(":%d", hfConfig.config.web.port)
+	log.Fatal(http.ListenAndServe(portStr, nil))
 }
