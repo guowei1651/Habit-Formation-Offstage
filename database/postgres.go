@@ -10,34 +10,37 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var db *sql.DB
+type Postgres struct {
+    db *sql.DB
+}
 
-func Ping(ctx context.Context) {
+func (p Postgres) connectPing() {
+    ctx, stop := context.WithCancel(context.Background())
+    defer stop()
+
 	ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
 	defer cancel()
 
 	log.Printf("db ping db-> ", db)
-	if err := db.PingContext(ctx); err != nil {
+	if err := p.db.PingContext(ctx); err != nil {
 		log.Fatalf("unable to connect to database: %v", err)
+        panic(err)
 	}
 }
 
-func sqlOpen() {
-    log.Printf("open db start")
+func (p Postgres) connectOpen() {
+    log.Printf("开始打开Postgres链接")
     var err error
-    db, err = sql.Open("postgres", "host= port=5432 user=appsmith password=appsmith dbname=appsmith sslmode=disable")
+    p.db, err = sql.Open("postgres", "host=172.25.1.22 port=5432 user=appsmith password=appsmith dbname=appsmith sslmode=disable")
     // db, err = sql.Open("postgres", "postgres://appsmith:appsmith@172.25.1.22:5432/appsmith?sslmode=disable")
     log.Printf("open db complete -> ", db)
-    db.SetConnMaxIdleTime(30*1000)
-    db.SetConnMaxLifetime(10*1000)
-    db.SetMaxIdleConns(10)
-    db.SetMaxOpenConns(20)
+    p.db.SetConnMaxIdleTime(30*1000)
+    p.db.SetConnMaxLifetime(10*1000)
+    p.db.SetMaxIdleConns(10)
+    p.db.SetMaxOpenConns(20)
     if err != nil {
         log.Fatal("open db connect fail -> ", err)
         panic(err)
     }
-
-    ctx, stop := context.WithCancel(context.Background())
-    defer stop()
-    Ping(ctx)
+    log.Printf("打开Postgres链接完成")
 }
