@@ -15,17 +15,19 @@ type Postgres struct {
 }
 
 func (p Postgres) ConnectPing() {
+    log.Printf("开始进行Postgres的Ping动作")
     ctx, stop := context.WithCancel(context.Background())
     defer stop()
 
 	ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
 	defer cancel()
 
-	log.Printf("db ping db-> ", p.db)
+	log.Printf("Postgres ping db-> ", p.db)
 	if err := p.db.PingContext(ctx); err != nil {
 		log.Fatalf("unable to connect to database: %v", err)
         panic(err)
 	}
+    log.Printf("进行Postgres的Ping动作完成")
 }
 
 func (p Postgres) ConnectOpen() {
