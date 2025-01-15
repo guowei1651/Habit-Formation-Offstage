@@ -56,7 +56,7 @@ func enrichSwaggerObject(swo *spec.Swagger) {
 		Description: "get CarouselItem"}}}
 }
 
-func OpenServer() {
+func OpenServer(ch chan string) {
 	webServer := WebServer{}
 	restful.DefaultContainer.Add(webServer.WebService())
 
@@ -82,5 +82,7 @@ func OpenServer() {
 	log.Printf("Get the API using http://xxx/apidocs.json")
 	log.Printf("Open Swagger UI using http://xxx/apidocs/?url=http://xxx/apidocs.json")
 	portStr := fmt.Sprintf(":%d", hfConfig.Config.WEBConfig.Port)
-	log.Fatal(http.ListenAndServe(portStr, nil))
+	err := http.ListenAndServe(portStr, nil)
+	log.Fatal(err)
+	ch <- err
 }

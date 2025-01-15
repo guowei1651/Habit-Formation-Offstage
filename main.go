@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"hf/config"
 	"hf/database"
 	"hf/web"
@@ -12,6 +14,9 @@ func main() {
 
 	database.OpenConnectPool()
 
-	go web.OpenServer()
-	go device.OpenServer()
+	ch := make(chan string)
+	go web.OpenServer(ch)
+	go device.OpenServer(ch)
+	err := <-c
+	log.Fatal("错误退出。%s", err)
 }
