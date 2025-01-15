@@ -43,6 +43,6 @@ func ParseConfig() {
 		log.Fatal(err)
 		os.Exit(1)
 	}
-	log.Printf("解析配置文件结束，配置数据为:%v", json.MarshalIndent(config, "", " "))
+	log.Printf("解析配置文件结束，配置数据为:%v", config)
 	log.Printf("解析配置完成")
 }
