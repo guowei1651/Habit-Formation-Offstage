@@ -10,7 +10,7 @@ import (
 type DBProcess interface {
 	ConnectPing()
 	ConnectOpen()
-	GetPool() (db *sql.DB)
+	GetPool() (Pool *sql.DB)
 }
 
 var DBConnectPool *sql.DB

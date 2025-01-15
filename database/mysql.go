@@ -7,7 +7,7 @@ import (
 )
 
 type Mysql struct {
-    db *sql.DB
+    Pool *sql.DB
 }
 
 func (m Mysql) ConnectPing() {
@@ -18,7 +18,7 @@ func (m Mysql) ConnectOpen() {
 	log.Printf("未实现")
 }
 
-func (m Mysql) GetPool() (db *sql.DB) {
+func (m Mysql) GetPool() (Pool *sql.DB) {
 	log.Printf("未实现")
 	panic("未实现")
 }

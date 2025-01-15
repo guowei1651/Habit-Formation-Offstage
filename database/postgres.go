@@ -11,7 +11,7 @@ import (
 )
 
 type Postgres struct {
-    db *sql.DB
+    Pool *sql.DB
 }
 
 func (p Postgres) ConnectPing() {
@@ -22,8 +22,8 @@ func (p Postgres) ConnectPing() {
 	ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
 	defer cancel()
 
-	log.Printf("Postgres ping db-> ", p.db)
-	if err := p.db.PingContext(ctx); err != nil {
+	log.Printf("Postgres ping db-> ", p.Pool)
+	if err := p.Pool.PingContext(ctx); err != nil {
 		log.Fatalf("unable to connect to database: %v", err)
         panic(err)
 	}
@@ -33,21 +33,21 @@ func (p Postgres) ConnectPing() {
 func (p Postgres) ConnectOpen() {
     log.Printf("开始打开Postgres链接")
     var err error
-    p.db, err = sql.Open("postgres", "host=172.25.1.22 port=5432 user=appsmith password=appsmith dbname=appsmith sslmode=disable")
+    p.Pool, err = sql.Open("postgres", "host=172.25.1.22 port=5432 user=appsmith password=appsmith dbname=appsmith sslmode=disable")
     // db, err = sql.Open("postgres", "postgres://appsmith:appsmith@172.25.1.22:5432/appsmith?sslmode=disable")
     if err != nil {
         log.Fatal("open db connect fail -> ", err)
         panic(err)
     }
-    p.db.SetConnMaxIdleTime(30*1000)
-    p.db.SetConnMaxLifetime(10*1000)
-    p.db.SetMaxIdleConns(10)
-    p.db.SetMaxOpenConns(20)
+    p.Pool.SetConnMaxIdleTime(30*1000)
+    p.Pool.SetConnMaxLifetime(10*1000)
+    p.Pool.SetMaxIdleConns(10)
+    p.Pool.SetMaxOpenConns(20)
 
-    log.Printf("链接已经打开，链接池信息: -> ", p.db)
+    log.Printf("链接已经打开，链接池信息: -> ", p.Pool)
     log.Printf("打开Postgres链接完成")
 }
 
-func (p Postgres) GetPool() (db *sql.DB) {
-    return p.db
+func (p Postgres) GetPool() (Pool *sql.DB) {
+    return p.Pool
 }
