@@ -61,7 +61,7 @@ func enrichSwaggerObject(swo *spec.Swagger) {
 		Description: "get CarouselItem"}}}
 }
 
-funct openServer() {
+func openServer() {
 	u := CarouselItemResource{map[string]CarouselItem{}}
 	restful.DefaultContainer.Add(u.WebService())
 

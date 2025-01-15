@@ -2,8 +2,6 @@
 package config
 
 import (
-	"log"
-
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -34,11 +32,11 @@ type Configuration struct {
 
 func (config *Configuration) loadData() error {
 	// 打开json文件
-	jsonFile, err := os.Open(config.configFile)
+	jsonFile, err := os.Open(config.ConfigFile)
 
 	// 最好要处理以下错误
 	if err != nil {
-		fmt.Printf("加载配置文件%v失败, err: %v\n", config.configFile, err)
+		fmt.Printf("加载配置文件%v失败, err: %v\n", config.ConfigFile, err)
 		return err
 	}
 

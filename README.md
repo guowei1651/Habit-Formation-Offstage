@@ -22,4 +22,10 @@ export GOPROXY=https://goproxy.cn
 ```bash
 go mod init hf
 go mod tidy
+
+go get github.com/spf13/cobra
+go get github.com/lib/pq
+go get github.com/emicklei/go-restful-openapi/v2
+go get github.com/emicklei/go-restful/v3
+go get github.com/go-openapi/spec
 ```
