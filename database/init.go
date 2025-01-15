@@ -26,11 +26,14 @@ func OpenConnectPool () {
 	} else {
 		panic("配置schema配置不支持")
 	}
-	
+
+	log.Printf("OpenConnectPool ConnectOpen pool: %v", pool)
 	pool.ConnectOpen()
 
+	log.Printf("OpenConnectPool ConnectPing pool: %v", pool)
 	pool.ConnectPing()
 
+	log.Printf("OpenConnectPool GetPool pool: %v", pool)
 	DBConnectPool = pool.GetPool()
 
 	log.Printf("创建数据库连接结束")

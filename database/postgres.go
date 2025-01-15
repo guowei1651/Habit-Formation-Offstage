@@ -44,7 +44,7 @@ func (p Postgres) ConnectOpen() {
     p.db.SetMaxIdleConns(10)
     p.db.SetMaxOpenConns(20)
 
-    log.Printf("open db complete -> ", p.db)
+    log.Printf("链接已经打开，链接池信息: -> ", p.db)
     log.Printf("打开Postgres链接完成")
 }
 
