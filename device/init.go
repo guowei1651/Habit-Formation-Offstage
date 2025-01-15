@@ -4,6 +4,6 @@ import (
 	"log"
 )
 
-func openServer() {
+func OpenServer() {
 	log.Printf("device open server")
 }

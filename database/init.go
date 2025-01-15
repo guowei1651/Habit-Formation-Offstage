@@ -4,6 +4,6 @@ import (
 	"log"
 )
 
-func openConnectPool () {
+func OpenConnectPool () {
 	log.Printf("db init")
 }

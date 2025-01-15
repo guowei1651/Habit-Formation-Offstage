@@ -10,8 +10,8 @@ import (
 func main() {
 	config.ParseConfig()
 
-	database.openConnectPool()
+	database.OpenConnectPool()
 
-	web.openServer()
-	device.openServer()
+	web.OpenServer()
+	device.OpenServer()
 }
