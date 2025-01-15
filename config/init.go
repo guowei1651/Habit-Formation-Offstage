@@ -21,7 +21,7 @@ func initCommand() *cobra.Command {
 		Use:   "hf",
 		Short: "hf is habit formation",
 		Long:  `hf is a habit formation offspring of the habit formation project`,
-		Run: runHelp,
+		// Run: runHelp,
 	}
 
 	flags := rootCmd.Flags()
@@ -31,6 +31,7 @@ func initCommand() *cobra.Command {
 }
 
 func ParseConfig() {
+	log.Printf("开始解析配置")
 	config = &Configuration{}
 
 	var rootCmd = initCommand()
@@ -43,4 +44,5 @@ func ParseConfig() {
 		log.Fatal(err)
 		os.Exit(1)
 	}
+	log.Printf("解析配置完成")
 }
