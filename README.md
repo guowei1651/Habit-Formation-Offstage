@@ -1,2 +1,25 @@
 # Habit-Formation-Offstage
 iot, openapi
+
+
+## build
+
+1. 启动编译镜像
+```bash
+docker container run -it --rm --name golang_build --hostname golang_build \
+  -v /home/wales/growing_iot/Habit-Formation-Offstage:/home/wales \
+  -w /home/wales \
+  golang:1.24rc1-alpine3.21 sh
+```
+
+2. 配置Go模块代理
+```bash
+export GO111MODULE=on
+export GOPROXY=https://goproxy.cn
+```
+
+3. 加载配置
+```bash
+go mod init hf
+go mod tidy
+```

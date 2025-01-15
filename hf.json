@@ -1,0 +1,13 @@
+{
+    "database" : {
+        "host" : "172.25.1.22",
+        "port" : 5432,
+        "user" : "appsmith",
+        "password" : "appsmith",
+        "dbname" : "appsmith",
+        "sslmode" : "disable"
+    },
+    "web" : {
+        "port" : 8090
+    }
+}
