@@ -3,6 +3,7 @@
 package config
 
 import (
+	"log"
 	"fmt"
 	"os"
 
@@ -23,7 +24,7 @@ func initCommand() *cobra.Command {
 		Run: runHelp,
 	}
 
-	flags := rootCmd.PersistentFlags()
+	flags := rootCmd.Flags()
 	flags.StringVar(&config.ConfigFile, "config", "./hf.json", "配置文件")
 
 	return rootCmd
@@ -34,12 +35,12 @@ func ParseConfig() {
 
 	var rootCmd = initCommand()
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 		os.Exit(1)
 	}
 
 	if err := config.loadData(); err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 		os.Exit(1)
 	}
 }
