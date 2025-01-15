@@ -17,6 +17,6 @@ func main() {
 	ch := make(chan string)
 	go web.OpenServer(ch)
 	go device.OpenServer(ch)
-	err := <-c
+	err := <- ch
 	log.Fatal("错误退出。%s", err)
 }
