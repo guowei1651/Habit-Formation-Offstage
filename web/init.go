@@ -84,5 +84,5 @@ func OpenServer(ch chan string) {
 	portStr := fmt.Sprintf(":%d", hfConfig.Config.WEBConfig.Port)
 	err := http.ListenAndServe(portStr, nil)
 	log.Fatal(err)
-	ch <- err
+	ch <- err.Error()
 }
