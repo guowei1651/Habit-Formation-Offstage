@@ -5,30 +5,16 @@ import (
 	"net/http"
 	"strconv"
 	"github.com/emicklei/go-restful"
+	"net/http"
+	service "hf/web/service"
+
+	"github.com/go-openapi/spec"
 )
 
-type CarouselItem struct {
-	Order		int    	`json:"order" description:"Carousel Item on carousel order" default:"1"`
-	Genus		string 	`json:"type" description:"type of the CarouselItem" default:"image"`
-	Duration	int 	`json:"duration" description:"duration of the CarouselItem" default:"30"`
-	ChartUrl	string 	`json:"chartUrl" description:"chartUrl of the CarouselItem" default:""`
-}
+
 
 type WEBResource struct {
-	
-
-}
-
-func aa () {
-	tags := []string{"carouselItems"}
-
-	ws.Route(ws.GET("{id}/carouselItems").To(webServer.findAllCarouselItemsByCarouseId).
-		// docs
-		Doc("get all carousel items in carousel").
-		Param(ws.PathParameter("id", "identifier of the Carousel").DataType("integer").DefaultValue("1")).
-		Metadata(restfulspec.KeyOpenAPITags, tags).
-		Writes(ResponseBody{}).
-		Returns(200, "OK", ResponseBody{}))
+	getRoute() ()
 }
 
 func (ci CarouselItemResource) findAllCarouselItemsByCarouseId(request *restful.Request, response *restful.Response) {
@@ -54,3 +40,14 @@ func (ci CarouselItemResource) findAllCarouselItemsByCarouseId(request *restful.
 	response.WriteAsJson(respBody)
 }
 
+func aa () {
+	tags := []string{"carouselItems"}
+
+	ws.Route(ws.GET("{id}/carouselItems").To(webServer.findAllCarouselItemsByCarouseId).
+		// docs
+		Doc("get all carousel items in carousel").
+		Param(ws.PathParameter("id", "identifier of the Carousel").DataType("integer").DefaultValue("1")).
+		Metadata(restfulspec.KeyOpenAPITags, tags).
+		Writes(ResponseBody{}).
+		Returns(200, "OK", ResponseBody{}))
+}

@@ -1,3 +1,4 @@
+// https://github.com/emicklei/go-restful/blob/v3/examples/user-resource/restful-user-resource.go
 package web
 
 import (
