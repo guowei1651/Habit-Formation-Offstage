@@ -64,8 +64,12 @@ func enrichSwaggerObject(swo *spec.Swagger) {
 
 func OpenServer(ch chan string) {
 	webServer := WebServer{}
-	restful.DefaultContainer.Add(webServer.WebService())
-
+	webServices := webServer.WebService()
+	for i, value := range webServices {
+        fmt.Printf("Index %d: %d\n", i, value)
+		restful.DefaultContainer.Add(value)
+    }
+	
 	restConfig := restfulspec.Config{
 		WebServices:                   restful.RegisteredWebServices(), // you control what services are visible
 		APIPath:                       "/apidocs.json",
