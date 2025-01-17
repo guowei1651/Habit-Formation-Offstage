@@ -54,6 +54,4 @@ func (loginResource *LoginResource) LoadRoute(ws *restful.WebService) {
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(common.ResponseBody{}).
 		Returns(200, "OK", common.ResponseBody{}))
-
-	return ws
 }

@@ -15,7 +15,7 @@ type CarouselApplication struct {
 
 }
 
-func (c *CarouselApplication)LoadRoute() {
+func (c *CarouselApplication)LoadRoute() (*restful.WebService) {
 	ws := new(restful.WebService)
 	ws.
 		Path("/carousels").
@@ -27,4 +27,5 @@ func (c *CarouselApplication)LoadRoute() {
 
 	carouselItemResource := control.CarouselItemResource{}
 	carouselItemResource.LoadRoute(ws)
+	return ws
 }

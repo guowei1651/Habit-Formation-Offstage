@@ -14,7 +14,7 @@ type UserApplication strucet {
 
 }
 
-func (ua *UserApplication)LoadRoute() {
+func (ua *UserApplication)LoadRoute() (*restful.WebService) {
 	ws := new(restful.WebService)
 	ws.
 		Path("/users").
@@ -23,4 +23,6 @@ func (ua *UserApplication)LoadRoute() {
 		
 	userResource := control.UserResource{}
 	userResource.LoadRoute(ws)
+	
+	return ws
 }
