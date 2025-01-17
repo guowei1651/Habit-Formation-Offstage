@@ -21,13 +21,14 @@ func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restf
 	userId := utils.GetUserId(request)
 	if len(userId) == 0 {
 		response.WriteErrorString(http.StatusNotFound, "plases login")
+		log.Printf("findAllCarouselItemsByCarouseId param error userId->", userId)
 		return
 	}
 
-	id, err := strconv.Atoi(request.PathParameter("id"))
+	id, err := strconv.Atoi(userId)
 	if err != nil {
-		log.Printf("findAllCarouselItemsByCarouseId param error id->", id)
-		response.WriteErrorString(http.StatusNotFound, "find CarouselItems params error.")
+		response.WriteErrorString(http.StatusNotFound, "plases login")
+		log.Printf("findAllCarouselItemsByCarouseId conv atoi error id->", userId)
 		return
 	}
 

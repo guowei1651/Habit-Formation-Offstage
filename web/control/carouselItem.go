@@ -18,7 +18,7 @@ type CarouselItemResource struct {
 
 func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful.Request, response *restful.Response) {
 	userId := utils.GetUserId(request)
-	if userId == nil {
+	if len(userId) == 0 {
 		response.WriteErrorString(http.StatusNotFound, "plases login")
 		return
 	}
@@ -38,7 +38,7 @@ func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful
 	}
 
 	log.Printf("findAllCarouselItemsByCarouseId db query result->", result)
-	respBody := ResponseBody{}
+	 respBody ResponseBody
 	respBody.Code = 0
 	respBody.Message = "success"
 	respBody.Data = result
