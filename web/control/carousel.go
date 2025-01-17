@@ -27,13 +27,13 @@ func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restf
 
 	id, err := strconv.Atoi(userId)
 	if err != nil {
-		response.WriteErrorString(http.StatusNotFound, "plases login")
 		log.Printf("findAllCarouselItemsByCarouseId conv atoi error id->", userId)
+		response.WriteErrorString(http.StatusNotFound, "plases login")
 		return
 	}
 
 	result, err := service.FindAllCarouselItemsByCarouseId(id)
-        if err != nil {
+	if err != nil {
 		log.Printf("findAllCarouselItemsByCarouseId db query error! err->", err)
 		response.WriteErrorString(http.StatusNotFound, "CarouselItems could not be found.")
 		return 

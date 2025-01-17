@@ -27,14 +27,14 @@ func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful
 	id, err := strconv.Atoi(carouselId)
 	if err != nil {
 		log.Printf("findAllCarouselItemsByCarouseId param error id->", id)
-		response.WriteErrorString(http.StatusNotFound, "find CarouselItems params error.")
+		response.WriteErrorString(http.StatusNotFound, err)
 		return
 	}
 
 	result, err := service.FindAllCarouselItemsByCarouseId(id)
 	if err != nil {
 		log.Printf("findAllCarouselItemsByCarouseId db query error! err->", err)
-		response.WriteErrorString(http.StatusNotFound, "CarouselItems could not be found.")
+		response.WriteErrorString(http.StatusNotFound, err)
 		return 
 	}
 
