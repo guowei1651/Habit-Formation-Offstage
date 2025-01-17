@@ -20,7 +20,7 @@ type UserResource struct {
 }
 
 // POST http://localhost:8080/users/login
-func (u *UserResource) login(request *restful.Request, response *restful.Response) {
+func (u *UserResource) Login(request *restful.Request, response *restful.Response) {
 	log.Println("User Login")
 	usr := UserVO{}
 	
@@ -54,9 +54,9 @@ func (userResource *UserResource) loadRoute() (*restful.WebService) {
 
 	tags := []string{"hf"}
 
-	ws.Route(ws.POST("/login").To(userResource.findAllCarouselItemsByCarouseId).
+	ws.Route(ws.POST("/login").To(userResource.Login).
 		Doc("user login").
-		Reads(User{}).
+		Reads(UserVO{}).
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(ResponseBody{}).
 		Returns(200, "OK", ResponseBody{}))
