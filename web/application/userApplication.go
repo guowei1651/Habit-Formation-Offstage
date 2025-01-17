@@ -10,7 +10,7 @@ import (
 	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 )
 
-type UserApplication strucet {
+type UserApplication struct {
 
 }
 
@@ -20,7 +20,7 @@ func (ua *UserApplication)LoadRoute() (*restful.WebService) {
 		Path("/users").
 		Consumes(restful.MIME_JSON).
 		Produces(restful.MIME_JSON)
-		
+
 	userResource := control.UserResource{}
 	userResource.LoadRoute(ws)
 	
