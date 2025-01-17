@@ -1,14 +1,9 @@
 package application
 
 import (
-	"log"
-	"strconv"
-	"net/http"
-
 	control "hf/web/control"
 
 	restful "github.com/emicklei/go-restful/v3"
-	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 )
 
 type CarouselApplication struct {
