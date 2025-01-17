@@ -17,10 +17,10 @@ import (
 type WebServer struct {}
 
 func (webServer WebServer) LoadWebService() {
-	ca := CarouselApplication{}
+	ca := app.CarouselApplication{}
 	restful.DefaultContainer.Add(ca.LoadRoute())
 
-	ua := UserApplication{}
+	ua := app.UserApplication{}
 	restful.DefaultContainer.Add(ua.LoadRoute())
 }
 
