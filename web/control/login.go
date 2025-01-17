@@ -46,7 +46,7 @@ func (u *UserResource) Login(request *restful.Request, response *restful.Respons
 	response.WriteHeaderAndEntity(http.StatusCreated, usr)
 }
 
-func (userResource *UserResource) loadRoute() (*restful.WebService) {
+func (userResource *UserResource) LoadRoute() (*restful.WebService) {
 	ws := new(restful.WebService)
 	ws.
 		Path("/users").

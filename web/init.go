@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	hfConfig "hf/config"
-	"hf/web/common"
 	control "hf/web/control"
 
 	restfulspec "github.com/emicklei/go-restful-openapi/v2"
@@ -17,16 +16,16 @@ import (
 
 type WebServer struct {}
 
-func (webServer WebServer) WebService() ([]restful.WebService) {
-	webServices := []restful.WebService
+func (webServer WebServer) WebService() ([]*restful.WebService) {
+	webServices := []*restful.WebService
 	userResource := control.UserResource{}
-	webServices = append(webServices, userResource.loadRoute())
+	webServices = append(webServices, userResource.LoadRoute())
 
 	carouselResource := control.CarouselResource{}
-	webServices = append(webServices, carouselResource.loadRoute())
+	webServices = append(webServices, carouselResource.LoadRoute())
 
 	carouselItemResource := control.CarouselItemResource{}
-	webServices = append(webServices, carouselItemResource.loadRoute())
+	webServices = append(webServices, carouselItemResource.LoadRoute())
 
 	return webServices
 }
@@ -62,7 +61,7 @@ func OpenServer(ch chan string) {
 	webServices := webServer.WebService()
 	for i, value := range webServices {
         fmt.Printf("Index %d: %d\n", i, value)
-		restful.DefaultContainer.Add(value)
+		restful.DefaultContainer.Add(&value)
     }
 	
 	restConfig := restfulspec.Config{

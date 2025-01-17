@@ -47,7 +47,7 @@ func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restf
 	response.WriteAsJson(respBody)
 }
 
-func (carouselResource *CarouselResource) loadRoute() (*restful.WebService) {
+func (carouselResource *CarouselResource) LoadRoute() (*restful.WebService) {
 	ws := new(restful.WebService)
 	ws.
 		Path("/carousels").
