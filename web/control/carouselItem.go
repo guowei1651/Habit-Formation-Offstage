@@ -46,13 +46,7 @@ func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful
 	response.WriteAsJson(respBody)
 }
 
-func (carouselItemResource *CarouselItemResource) LoadRoute() (*restful.WebService) {
-	ws := new(restful.WebService)
-	ws.
-		Path("/carousels").
-		Consumes(restful.MIME_JSON).
-		Produces(restful.MIME_JSON)
-
+func (carouselItemResource *CarouselItemResource) LoadRoute() {
 	tags := []string{"hf"}
 
 	ws.Route(ws.GET("{id}/carouselItems").To(carouselItemResource.FindAllCarouselItemsByCarouseId).
@@ -62,6 +56,4 @@ func (carouselItemResource *CarouselItemResource) LoadRoute() (*restful.WebServi
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(common.ResponseBody{}).
 		Returns(200, "OK", common.ResponseBody{}))
-		
-	return ws
 }

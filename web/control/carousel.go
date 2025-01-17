@@ -14,7 +14,6 @@ import (
 )
 
 type CarouselResource struct {
-
 }
 
 func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restful.Request, response *restful.Response) {
@@ -47,13 +46,7 @@ func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restf
 	response.WriteAsJson(respBody)
 }
 
-func (carouselResource *CarouselResource) LoadRoute() (*restful.WebService) {
-	ws := new(restful.WebService)
-	ws.
-		Path("/carousels").
-		Consumes(restful.MIME_JSON).
-		Produces(restful.MIME_JSON)
-
+func (carouselResource *CarouselResource) LoadRoute(ws *restful.WebService) {
 	tags := []string{"hf"}
 
 	ws.Route(ws.GET("").To(carouselResource.FindAllCarouselByOwnerId).
@@ -62,6 +55,4 @@ func (carouselResource *CarouselResource) LoadRoute() (*restful.WebService) {
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(common.ResponseBody{}).
 		Returns(200, "OK", common.ResponseBody{}))
-	
-	return ws
 }

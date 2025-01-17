@@ -16,12 +16,11 @@ type UserVO struct {
 	Password string `json:"password" description:"password"`
 }
 
-type UserResource struct {
-
+type LoginResource struct {
 }
 
 // POST http://localhost:8080/users/login
-func (u *UserResource) Login(request *restful.Request, response *restful.Response) {
+func (u *LoginResource) Login(request *restful.Request, response *restful.Response) {
 	log.Println("User Login")
 	usr := UserVO{}
 	
@@ -46,16 +45,10 @@ func (u *UserResource) Login(request *restful.Request, response *restful.Respons
 	response.WriteHeaderAndEntity(http.StatusCreated, usr)
 }
 
-func (userResource *UserResource) LoadRoute() (*restful.WebService) {
-	ws := new(restful.WebService)
-	ws.
-		Path("/users").
-		Consumes(restful.MIME_JSON).
-		Produces(restful.MIME_JSON)
-
+func (loginResource *LoginResource) LoadRoute(*restful.WebService) {
 	tags := []string{"hf"}
 
-	ws.Route(ws.POST("/login").To(userResource.Login).
+	ws.Route(ws.POST("/login").To(loginResource.Login).
 		Doc("user login").
 		Reads(UserVO{}).
 		Metadata(restfulspec.KeyOpenAPITags, tags).

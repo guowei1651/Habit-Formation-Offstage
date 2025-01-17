@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	hfConfig "hf/config"
-	control "hf/web/control"
+	app "hf/web/application"
 
 	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 	restful "github.com/emicklei/go-restful/v3"
@@ -17,14 +17,11 @@ import (
 type WebServer struct {}
 
 func (webServer WebServer) LoadWebService() {
-	userResource := control.UserResource{}
-	restful.DefaultContainer.Add(userResource.LoadRoute())
+	ca := CarouselApplication{}
+	restful.DefaultContainer.Add(ca.LoadRoute())
 
-	carouselResource := control.CarouselResource{}
-	restful.DefaultContainer.Add(carouselResource.LoadRoute())
-
-	carouselItemResource := control.CarouselItemResource{}
-	restful.DefaultContainer.Add(carouselItemResource.LoadRoute())
+	ua := UserApplication{}
+	restful.DefaultContainer.Add(ua.LoadRoute())
 }
 
 func enrichSwaggerObject(swo *spec.Swagger) {
