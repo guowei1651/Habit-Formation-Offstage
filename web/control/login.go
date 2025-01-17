@@ -35,8 +35,8 @@ func (u *UserResource) Login(request *restful.Request, response *restful.Respons
 	
 	loginInfo, err := service.Login(usr.UserName, usr.Password)
 	if (err != nil) {
-		respBody.code = -1
-		respBody.message = err.Error()
+		respBody.Code = -1
+		respBody.Message = err.Error()
 		response.WriteError(http.StatusInternalServerError, respBody)
 		return
 	}
