@@ -33,7 +33,7 @@ func (u *UserResource) login(request *restful.Request, response *restful.Respons
 	log.Println("User Login name is : %v", usr.UserName)
 	
 	loginInfo, err := service.Login(usr.UserName, usr.Password)
-	if (err != null) {
+	if (err != nil) {
 		respBody.code = -1
 		respBody.message = err.Error()
 		response.WriteError(http.StatusInternalServerError, respBody)
