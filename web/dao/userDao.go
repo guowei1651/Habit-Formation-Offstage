@@ -3,7 +3,7 @@ package dao
 import (
 	"log"
 	"strconv"
-	
+
 	"database/sql"
 
 	db "hf/database"
@@ -16,12 +16,12 @@ type User struct {
 }
 
 func Login(username string, password string) (u User, err error) {
-	log.Printf("sqlSelectAllCarouselItemsByCarouselId param->", carouselId)
+	log.Printf("sqlSelectAllCarouselItemsByCarouselId param->", username, password)
 	var user User
 	var id string
 	var name string
 	var email string
-    rows, err := db.DBConnectPool.QueryRowContext(`
+    err := db.DBConnectPool.QueryRowContext(`
 select u.id, u.username, u.email 
 from users u 
 where u.username = $1 and u."password" = md5(concat(u.slat, $2));`, username, password).Scan(&id, &name, &email)
@@ -36,7 +36,7 @@ where u.username = $1 and u."password" = md5(concat(u.slat, $2));`, username, pa
 		log.Printf("username is %q, account email is %s\n", username, email)
 	}
 
-    var user User
+	user = User{}
 	user.ID, _ = strconv.Atoi(id)
 	user.UserName = name
 	user.EMail = email
