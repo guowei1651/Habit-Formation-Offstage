@@ -1,4 +1,4 @@
-pacage common
+package common
 
 type ResponseBody struct {
 	Code int `json:"code"`
