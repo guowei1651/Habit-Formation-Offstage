@@ -10,12 +10,8 @@ import (
 	service "hf/web/service"
 
 	restful "github.com/emicklei/go-restful/v3"
+	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 )
-
-type UserVO struct {
-	UserName string `json:"username" description:"user name"`
-	Password string `json:"password" description:"password"`
-}
 
 type CarouselResource struct {
 
@@ -28,8 +24,8 @@ func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restf
 		return
 	}
 
-	id,_ := strconv.Atoi(request.PathParameter("id"))
-	if id == 0 {
+	id, err := strconv.Atoi(request.PathParameter("id"))
+	if err != nil {
 		log.Printf("findAllCarouselItemsByCarouseId param error id->", id)
 		response.WriteErrorString(http.StatusNotFound, "find CarouselItems params error.")
 		return

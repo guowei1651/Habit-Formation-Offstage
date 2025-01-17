@@ -23,8 +23,8 @@ func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful
 		return
 	}
 
-	id,_ := strconv.Atoi(request.PathParameter("id"))
-	if id == 0 {
+	id, err := strconv.Atoi(request.PathParameter("id"))
+	if err != 0 {
 		log.Printf("findAllCarouselItemsByCarouseId param error id->", id)
 		response.WriteErrorString(http.StatusNotFound, "find CarouselItems params error.")
 		return
