@@ -55,7 +55,7 @@ func (userResource *UserResource) loadRoute() (*restful.WebService) {
 
 	ws.Route(ws.POST("/login").To(userResource.findAllCarouselItemsByCarouseId).
 		Doc("user login").
-		Reads(User{})). // from the request
+		Reads(User{}).
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(ResponseBody{}).
 		Returns(200, "OK", ResponseBody{}))
