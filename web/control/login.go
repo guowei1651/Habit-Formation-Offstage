@@ -45,7 +45,7 @@ func (u *LoginResource) Login(request *restful.Request, response *restful.Respon
 	response.WriteHeaderAndEntity(http.StatusCreated, usr)
 }
 
-func (loginResource *LoginResource) LoadRoute(*restful.WebService) {
+func (loginResource *LoginResource) LoadRoute(ws *restful.WebService) {
 	tags := []string{"hf"}
 
 	ws.Route(ws.POST("/login").To(loginResource.Login).
