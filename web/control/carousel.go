@@ -3,6 +3,7 @@ package control
 import (
 	"log"
 	"strconv"
+	"net/http"
 
 	utils "hf/web/utils"
 	service "hf/web/service"
@@ -63,4 +64,6 @@ func (carouselResource *CarouselResource) loadRoute(ws *restful.WebService) (*re
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(ResponseBody{}).
 		Returns(200, "OK", ResponseBody{}))
+	
+	return ws
 }

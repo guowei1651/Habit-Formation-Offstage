@@ -61,5 +61,6 @@ func (carouselItemResource *CarouselItemResource) loadRoute() (*restful.WebServi
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(ResponseBody{}).
 		Returns(200, "OK", ResponseBody{}))
-    
+		
+	return ws
 }
