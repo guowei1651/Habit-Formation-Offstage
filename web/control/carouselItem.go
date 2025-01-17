@@ -10,7 +10,7 @@ import (
 	service "hf/web/service"
 
 	restful "github.com/emicklei/go-restful/v3"
-	restfulspec "github.com/go-openapi/spec"
+	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 )
 
 type CarouselItemResource struct {
