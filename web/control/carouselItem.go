@@ -38,7 +38,7 @@ func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful
 	}
 
 	log.Printf("findAllCarouselItemsByCarouseId db query result->", result)
-	 respBody ResponseBody
+	respBody := ResponseBody{}
 	respBody.Code = 0
 	respBody.Message = "success"
 	respBody.Data = result
