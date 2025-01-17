@@ -17,7 +17,7 @@ type Carousel struct {
 }
 
 func FindAllCarouselByOwnerId(ownerId int) ([]CarouselItem, error) {
-    log.Printf("sqlSelectAllCarouselItemsByCarouselId param->", carouselId)
+    log.Printf("sqlSelectAllCarouselItemsByCarouselId param->", ownerId)
     rows, err := db.DBConnectPool.Query(`
 select c.id, c.name, c.description, c.owner_id, c.brownser_url, c.created_at, c.updated_at 
 from carousel c 
@@ -43,7 +43,7 @@ where owner_id = $1 and delete_flag = delete_flag ;`, ownerId)
             log.Fatal("db row next error. err->", err)
             return carousels, err
         }
-        log.Printf("row ->", order, genus, duration, chartUrl)
+        log.Printf("row ->", id, name, description, ownerId, brownserUrl, createdAt, updatedAt)
 		c.ID = id
 		c.Name = name
 		c.Description = description
