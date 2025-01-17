@@ -21,7 +21,7 @@ func Login(username string, password string) (u User, err error) {
 	var id string
 	var name string
 	var email string
-    err = db.DBConnectPool.QueryRowContext(`
+    err = db.DBConnectPool.QueryRow(`
 select u.id, u.username, u.email 
 from users u 
 where u.username = $1 and u."password" = md5(concat(u.slat, $2));`, username, password).Scan(&id, &name, &email)
