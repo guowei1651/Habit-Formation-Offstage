@@ -19,7 +19,7 @@ type CarouselResource struct {
 
 func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restful.Request, response *restful.Response) {
 	userId := utils.GetUserId(request)
-	if userId == nil {
+	if len(userId) == 0 {
 		response.WriteErrorString(http.StatusNotFound, "plases login")
 		return
 	}
