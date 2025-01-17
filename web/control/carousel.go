@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"net/http"
 
-	"hf/web/common"
+	common "hf/web/common"
 	utils "hf/web/utils"
 	service "hf/web/service"
 
@@ -40,7 +40,7 @@ func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restf
 	}
 
 	log.Printf("findAllCarouselItemsByCarouseId db query result->", result)
-	respBody := ResponseBody{}
+	respBody := common.ResponseBody{}
 	respBody.Code = 0
 	respBody.Message = "success"
 	respBody.Data = result
@@ -60,8 +60,8 @@ func (carouselResource *CarouselResource) loadRoute() (*restful.WebService) {
 		// docs
 		Doc("get all carousel by owner").
 		Metadata(restfulspec.KeyOpenAPITags, tags).
-		Writes(ResponseBody{}).
-		Returns(200, "OK", ResponseBody{}))
+		Writes(common.ResponseBody{}).
+		Returns(200, "OK", common.ResponseBody{}))
 	
 	return ws
 }
