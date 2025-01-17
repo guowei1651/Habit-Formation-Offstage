@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	hfConfig "hf/config"
+	"hf/web/common"
 	control "hf/web/control"
 
 	restfulspec "github.com/emicklei/go-restful-openapi/v2"
@@ -15,12 +16,6 @@ import (
 )
 
 type WebServer struct {}
-
-type ResponseBody struct {
-	Code int `json:"code"`
-	Message string `json:"message"`
-	Data interface{} `json:"data"`
-}
 
 func (webServer WebServer) WebService() ([]restful.WebService) {
 	webServices := []restful.WebService
