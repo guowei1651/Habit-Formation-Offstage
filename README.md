@@ -12,6 +12,14 @@ docker container run -it --rm --name golang_build --hostname golang_build \
   golang:1.24rc1-alpine3.21 sh
 ```
 
+```
+docker container run -it --rm --name golang_build --hostname golang_build \
+  -v /home/wales/growing_iot/Offstage:/home/wales \
+  -w /home/wales \
+  golang:1.24rc1-alpine3.21 sh
+```
+
+
 2. 配置Go模块代理
 ```bash
 export GO111MODULE=on
@@ -28,4 +36,9 @@ go get github.com/lib/pq
 go get github.com/emicklei/go-restful-openapi/v2
 go get github.com/emicklei/go-restful/v3
 go get github.com/go-openapi/spec
+```
+
+4. 编译
+```bash
+go build -o hf main.go
 ```

@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	hfConfig "hf/config"
+	control "hf/web/control"
 
 	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 	restful "github.com/emicklei/go-restful/v3"
@@ -21,10 +22,18 @@ type ResponseBody struct {
 	Data interface{} `json:"data"`
 }
 
-func (webServer WebServer) WebService() *restful.WebService {
+func (webServer WebServer) WebService() ([]restful.WebService) {
+	webServices := []restful.WebService
+	userResource := control.UserResource{}
+	webServices = append(webServices, userResource.loadRoute())
 
+	carouselResource := control.CarouselResource{}
+	webServices = append(webServices, carouselResource.loadRoute())
 
-	return ws
+	carouselItemResource := control.CarouselItemResource{}
+	webServices = append(webServices, carouselItemResource.loadRoute())
+
+	return webServices
 }
 
 func enrichSwaggerObject(swo *spec.Swagger) {
