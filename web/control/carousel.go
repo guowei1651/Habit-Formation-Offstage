@@ -39,14 +39,14 @@ func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restf
 	}
 
 	log.Printf("findAllCarouselItemsByCarouseId db query result->", result)
-	var respBody ResponseBody
+	respBody := ResponseBody{}
 	respBody.Code = 0
 	respBody.Message = "success"
 	respBody.Data = result
 	response.WriteAsJson(respBody)
 }
 
-func (carouselResource *CarouselResource) loadRoute(ws *restful.WebService) (*restful.WebService) {
+func (carouselResource *CarouselResource) loadRoute() (*restful.WebService) {
 	ws := new(restful.WebService)
 	ws.
 		Path("/carousels").
