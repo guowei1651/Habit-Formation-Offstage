@@ -16,16 +16,15 @@ import (
 
 type WebServer struct {}
 
-func (webServer WebServer) WebService() ([]*restful.WebService) {
-	webServices := []*restful.WebService
+func (webServer WebServer) LoadWebService() {
 	userResource := control.UserResource{}
-	webServices = append(webServices, userResource.LoadRoute())
+	restful.DefaultContainer.Add(userResource.LoadRoute())
 
 	carouselResource := control.CarouselResource{}
-	webServices = append(webServices, carouselResource.LoadRoute())
+	restful.DefaultContainer.Add(carouselResource.LoadRoute())
 
 	carouselItemResource := control.CarouselItemResource{}
-	webServices = append(webServices, carouselItemResource.LoadRoute())
+	restful.DefaultContainer.Add(carouselItemResource.LoadRoute())
 
 	return webServices
 }
@@ -58,11 +57,7 @@ func enrichSwaggerObject(swo *spec.Swagger) {
 
 func OpenServer(ch chan string) {
 	webServer := WebServer{}
-	webServices := webServer.WebService()
-	for i, value := range webServices {
-        fmt.Printf("Index %d: %d\n", i, value)
-		restful.DefaultContainer.Add(&value)
-    }
+	webServer.LoadWebService()
 	
 	restConfig := restfulspec.Config{
 		WebServices:                   restful.RegisteredWebServices(), // you control what services are visible
