@@ -40,9 +40,9 @@ func (u *UserResource) Login(request *restful.Request, response *restful.Respons
 		response.WriteError(http.StatusInternalServerError, respBody)
 		return
 	}
-	respBody.code = 0
-	respBody.message = "success"
-	respBody.data = loginInfo
+	respBody.Code = 0
+	respBody.Message = "success"
+	respBody.Data = loginInfo
 	response.WriteHeaderAndEntity(http.StatusCreated, usr)
 }
 
