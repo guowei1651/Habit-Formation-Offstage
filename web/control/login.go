@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 	
-	"hf/web/common"
+	common "hf/web/common"
 	service "hf/web/service"
 
 	restful "github.com/emicklei/go-restful/v3"
@@ -30,7 +30,7 @@ func (u *UserResource) Login(request *restful.Request, response *restful.Respons
 		return
 	}
 
-	respBody := ResponseBody{}
+	respBody := common.ResponseBody{}
 	log.Println("User Login name is : %v", usr.UserName)
 	
 	loginInfo, err := service.Login(usr.UserName, usr.Password)
@@ -59,8 +59,8 @@ func (userResource *UserResource) loadRoute() (*restful.WebService) {
 		Doc("user login").
 		Reads(UserVO{}).
 		Metadata(restfulspec.KeyOpenAPITags, tags).
-		Writes(ResponseBody{}).
-		Returns(200, "OK", ResponseBody{}))
+		Writes(common.ResponseBody{}).
+		Returns(200, "OK", common.ResponseBody{}))
 
 	return ws
 }
