@@ -15,7 +15,7 @@ type User struct {
 	EMail		string	`json:"email" description:"email"`
 }
 
-func Login(username string, password string) (u User, err error) {
+func Login(username string, password string) (u *User, err error) {
 	log.Printf("sqlSelectAllCarouselItemsByCarouselId param->", username, password)
 	var user User
 	var id string

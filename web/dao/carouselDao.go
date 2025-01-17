@@ -16,7 +16,7 @@ type Carousel struct {
 	UpdatedAt time.Time
 }
 
-func FindAllCarouselByOwnerId(ownerId int) ([]CarouselItem, error) {
+func FindAllCarouselByOwnerId(ownerId int) ([]Carousel, error) {
     log.Printf("sqlSelectAllCarouselItemsByCarouselId param->", ownerId)
     rows, err := db.DBConnectPool.Query(`
 select c.id, c.name, c.description, c.owner_id, c.brownser_url, c.created_at, c.updated_at 
