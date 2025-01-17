@@ -10,7 +10,7 @@ import (
 	service "hf/web/service"
 
 	restful "github.com/emicklei/go-restful/v3"
-	"github.com/go-openapi/spec"
+	restfulspec "github.com/go-openapi/spec"
 )
 
 type CarouselItemResource struct {
@@ -31,7 +31,7 @@ func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful
 		return
 	}
 
-	result, err := sqlSelectAllCarouselItemsByCarouselId(id)
+	result, err := service.FindAllCarouselItemsByCarouseId(id)
         if err != nil {
 		log.Printf("findAllCarouselItemsByCarouseId db query error! err->", err)
 		response.WriteErrorString(http.StatusNotFound, "CarouselItems could not be found.")
