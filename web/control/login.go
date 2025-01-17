@@ -3,20 +3,24 @@ package control
 import (
 	"log"
 	"net/http"
+	
 	service "hf/web/service"
 
-	"github.com/go-openapi/spec"
+	restful "github.com/emicklei/go-restful/v3"
 )
 
 type UserVO struct {
-	UserName string
-	Password string
+	UserName string `json:"username" description:"user name"`
+	Password string `json:"password" description:"password"`
 }
 
-// POST http://localhost:8080/users
-// <User><Id>1</Id><Name>Melissa</Name></User>
+type UserResource struct {
+
+}
+
+// POST http://localhost:8080/users/login
 func (u *UserResource) login(request *restful.Request, response *restful.Response) {
-	log.Println("createUser")
+	log.Println("User Login")
 	usr := User{}
 	
 	if err := request.ReadEntity(&usr); err != nil {
@@ -25,6 +29,7 @@ func (u *UserResource) login(request *restful.Request, response *restful.Respons
 	}
 
 	respBody := ResponseBody{}
+	log.Println("User Login name is : %v", usr.UserName)
 	
 	loginInfo, err := service.Login(usr.UserName, usr.Password)
 	if (err != null) {
@@ -39,29 +44,21 @@ func (u *UserResource) login(request *restful.Request, response *restful.Respons
 	response.WriteHeaderAndEntity(http.StatusCreated, usr)
 }
 
-func aa () {
+func (userResource *UserResource) loadRoute() (*restful.WebService) {
 	ws := new(restful.WebService)
 	ws.
 		Path("/users").
 		Consumes(restful.MIME_JSON).
-		Produces(restful.MIME_JSON) // you can specify this per route as well
+		Produces(restful.MIME_JSON)
 
 	tags := []string{"hf"}
 
-	ws.Route(ws.POST("").To(webServer.findAllCarouselItemsByCarouseId).
-		// docs
-		Doc("get all carousel items in carousel").
-		Param(ws.PathParameter("id", "identifier of the Carousel").DataType("integer").DefaultValue("1")).
+	ws.Route(ws.POST("/login").To(userResource.findAllCarouselItemsByCarouseId).
+		Doc("user login").
+		Reads(User{})). // from the request
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(ResponseBody{}).
 		Returns(200, "OK", ResponseBody{}))
-
-	ws.Route(ws.POST("/login").To(u.createUser).
-		// docs
-		Doc("create a user").
-		Metadata(restfulspec.KeyOpenAPITags, tags).
-		Reads(User{})) // from the request
-
 
 	return ws
 }

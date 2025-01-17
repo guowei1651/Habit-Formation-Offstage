@@ -4,20 +4,25 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"github.com/emicklei/go-restful"
+	restful "github.com/emicklei/go-restful/v3"
 	"net/http"
+
+	utils "hf/web/utils"
 	service "hf/web/service"
 
 	"github.com/go-openapi/spec"
 )
 
-
-
-type WEBResource struct {
-	getRoute() ()
+type CarouselItemResource struct {
 }
 
-func (ci CarouselItemResource) findAllCarouselItemsByCarouseId(request *restful.Request, response *restful.Response) {
+func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful.Request, response *restful.Response) {
+	userId := utils.GetUserId(request)
+	if userId == nil {
+		response.WriteErrorString(http.StatusNotFound, "plases login")
+		return
+	}
+
 	id,_ := strconv.Atoi(request.PathParameter("id"))
 	if id == 0 {
 		log.Printf("findAllCarouselItemsByCarouseId param error id->", id)
@@ -40,14 +45,21 @@ func (ci CarouselItemResource) findAllCarouselItemsByCarouseId(request *restful.
 	response.WriteAsJson(respBody)
 }
 
-func aa () {
-	tags := []string{"carouselItems"}
+func (carouselItemResource *CarouselItemResource) loadRoute() (*restful.WebService) {
+	ws := new(restful.WebService)
+	ws.
+		Path("/carousels").
+		Consumes(restful.MIME_JSON).
+		Produces(restful.MIME_JSON)
 
-	ws.Route(ws.GET("{id}/carouselItems").To(webServer.findAllCarouselItemsByCarouseId).
+	tags := []string{"hf"}
+
+	ws.Route(ws.GET("{id}/carouselItems").To(carouselItemResource.FindAllCarouselItemsByCarouseId).
 		// docs
 		Doc("get all carousel items in carousel").
 		Param(ws.PathParameter("id", "identifier of the Carousel").DataType("integer").DefaultValue("1")).
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Writes(ResponseBody{}).
 		Returns(200, "OK", ResponseBody{}))
+    
 }

@@ -22,11 +22,7 @@ type ResponseBody struct {
 }
 
 func (webServer WebServer) WebService() *restful.WebService {
-	ws := new(restful.WebService)
-	ws.
-		Path("/carousel").
-		Consumes(restful.MIME_JSON).
-		Produces(restful.MIME_JSON) // you can specify this per route as well
+
 
 	return ws
 }
@@ -74,7 +70,7 @@ func OpenServer(ch chan string) {
 
 	// Optionally, you may need to enable CORS for the UI to work.
 	cors := restful.CrossOriginResourceSharing{
-		AllowedHeaders: []string{"Content-Type", "Accept"},
+		AllowedHeaders: []string{"Content-Type", "Accept", "HF-User-Id"},
 		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTION"},
 		CookiesAllowed: false,
 		Container:      restful.DefaultContainer}
