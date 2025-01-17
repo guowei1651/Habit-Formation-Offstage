@@ -25,8 +25,6 @@ func (webServer WebServer) LoadWebService() {
 
 	carouselItemResource := control.CarouselItemResource{}
 	restful.DefaultContainer.Add(carouselItemResource.LoadRoute())
-
-	return webServices
 }
 
 func enrichSwaggerObject(swo *spec.Swagger) {
