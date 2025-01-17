@@ -41,5 +41,5 @@ where u.username = $1 and u."password" = md5(concat(u.slat, $2));`, username, pa
 	user.UserName = name
 	user.EMail = email
 
-    return user, err
+    return &user, err
 }
