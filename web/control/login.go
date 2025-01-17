@@ -22,7 +22,7 @@ type UserResource struct {
 // POST http://localhost:8080/users/login
 func (u *UserResource) login(request *restful.Request, response *restful.Response) {
 	log.Println("User Login")
-	usr := User{}
+	usr := UserVO{}
 	
 	if err := request.ReadEntity(&usr); err != nil {
 		response.WriteError(http.StatusInternalServerError, err)
