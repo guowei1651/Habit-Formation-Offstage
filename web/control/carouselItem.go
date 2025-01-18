@@ -49,7 +49,7 @@ func (ci *CarouselItemResource) FindAllCarouselItemsByCarouseId(request *restful
 func (carouselItemResource *CarouselItemResource) LoadRoute(ws *restful.WebService) {
 	tags := []string{"hf"}
 
-	ws.Route(ws.GET("{id}/carouselItems").To(carouselItemResource.FindAllCarouselItemsByCarouseId).
+	ws.Route(ws.GET("{id}/items").To(carouselItemResource.FindAllCarouselItemsByCarouseId).
 		// docs
 		Doc("get all carousel items in carousel").
 		Param(ws.PathParameter("id", "identifier of the Carousel").DataType("integer").DefaultValue("1")).

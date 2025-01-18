@@ -73,7 +73,7 @@ curl 'http://172.25.1.22:8090/carousels' -X GET \
 
 3. 获取轮播项
 ```bash
-curl 'http://172.25.1.22:8090/carousels' -X GET \
+curl 'http://172.25.1.22:8090/carousels/1/items' -X GET \
   -H 'HF-User-Id: 1' \
   -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8'
 ```
