@@ -31,7 +31,7 @@ func (carouselResource *CarouselResource)FindAllCarouselByOwnerId(request *restf
 		return
 	}
 
-	result, err := service.FindAllCarouselItemsByCarouseId(id)
+	result, err := service.FindAllCarouselByOwnerId(id)
 	if err != nil {
 		log.Printf("FindAllCarouselByOwnerId db query error! err->", err)
 		response.WriteErrorString(http.StatusNotFound, "CarouselItems could not be found.")
