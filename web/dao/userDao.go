@@ -24,7 +24,7 @@ func Login(username string, password string) (u *User, err error) {
     row := db.DBConnectPool.QueryRow(`
 select u.id, u.username, u.email 
 from users u 
-where u.username = "$1" and u."password" = md5(concat(u.slat, "$2"));`, username, password)
+where u.username = '$1' and u."password" = md5(concat(u.slat, '$2'));`, username, password)
     if row == nil {
 		log.Printf("没找到这个用户", err)
 		return nil, err
