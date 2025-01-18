@@ -28,6 +28,8 @@ where owner_id = $1 and delete_flag = delete_flag ;`, ownerId)
     }
     defer rows.Close()
 
+    log.Printf("sqlSelectAllCarouselItemsByCarouselId result->", rows)
+
     var carousels []Carousel
 
     for rows.Next() {
@@ -57,6 +59,7 @@ where owner_id = $1 and delete_flag = delete_flag ;`, ownerId)
         log.Fatal("db row next error. err->", err)
         return nil, err
     }
-    return carousels, err
 
+
+    return carousels, err
 }

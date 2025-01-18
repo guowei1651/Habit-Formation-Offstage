@@ -52,3 +52,28 @@ docker container run -d --name growing-iot --hostname growing-iot \
   -w /growing \
   alpine:3.21 ./hf
 ```
+
+## 测试
+
+1. 登录测试
+
+```bash
+curl 'http://172.25.1.22:8090/users/login' -X POST \
+  -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8' \
+  --data-raw '{"username": "xxxxx", "password": "xxxxxx"}'
+```
+
+2. 获取轮播
+
+```bash
+curl 'http://172.25.1.22:8090/carousels' -X GET \
+  -H 'HF-User-Id: xxxxxx' \
+  -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8'
+```
+
+3. 获取轮播项
+```bash
+curl 'http://172.25.1.22:8090/carousels' -X GET \
+  -H 'HF-User-Id: 1' \
+  -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8'
+```
