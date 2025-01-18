@@ -29,8 +29,8 @@ func (u *LoginResource) Login(request *restful.Request, response *restful.Respon
 		return
 	}
 
-	if len(usr.UserName) == 0 || len(user.Password) ==0 {
-		response.WriteError(http.StatusInternalServerError, "请填写用户名密码之后再点击登录")
+	if len(usr.UserName) == 0 || len(usr.Password) ==0 {
+		response.WriteErrorString(http.StatusInternalServerError, "请填写用户名密码之后再点击登录")
 		return
 	}
 
