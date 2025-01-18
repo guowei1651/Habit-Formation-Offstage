@@ -44,6 +44,7 @@ func (u *LoginResource) Login(request *restful.Request, response *restful.Respon
 		response.WriteError(http.StatusInternalServerError, err)
 		return
 	}
+	log.Println("Login loginInfo->", loginInfo)
 	respBody.Code = 0
 	respBody.Message = "success"
 	respBody.Data = loginInfo
