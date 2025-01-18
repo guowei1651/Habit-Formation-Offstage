@@ -6,7 +6,6 @@ import (
 	"strconv"
 
 	"database/sql"
-
 	db "hf/database"
 )
 
@@ -22,11 +21,11 @@ func Login(username string, password string) (u *User, err error) {
 	var id string
 	var name string
 	var email string
-	sql := fmt.Sprintf(`
+	selectSql := fmt.Sprintf(`
 select u.id, u.username, u.email 
 from users u 
 where u.username = '%s' and u."password" = md5(concat(u.slat, '%s'));`, username, password)
-    row := db.DBConnectPool.QueryRow(sql)
+    row := db.DBConnectPool.QueryRow(selectSql)
     if row == nil {
 		log.Printf("没找到这个用户", err)
 		return nil, err
