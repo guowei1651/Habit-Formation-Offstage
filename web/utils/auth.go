@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	restful "github.com/emicklei/go-restful/v3"
 )
 
