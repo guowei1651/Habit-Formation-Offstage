@@ -29,8 +29,13 @@ func (u *LoginResource) Login(request *restful.Request, response *restful.Respon
 		return
 	}
 
+	if len(usr.UserName) == 0 || len(user.Password) ==0 {
+		response.WriteError(http.StatusInternalServerError, "请填写用户名密码之后再点击登录")
+		return
+	}
+
 	respBody := common.ResponseBody{}
-	log.Println("User Login name is : %v", usr.UserName)
+	log.Println("User Login name is : ", usr.UserName)
 	
 	loginInfo, err := service.Login(usr.UserName, usr.Password)
 	if (err != nil) {

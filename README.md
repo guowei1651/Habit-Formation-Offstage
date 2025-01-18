@@ -42,3 +42,9 @@ go get github.com/go-openapi/spec
 ```bash
 go build -o hf main.go
 ```
+
+## 启动
+
+```bash
+docker container run -d --name growing-iot --hostname growing-iot -p 8080:8080 -v /home/wales/growing_iot/:/growing -w /growing alpine:3.21 ./main
+```
