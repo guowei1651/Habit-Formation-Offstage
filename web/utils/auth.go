@@ -7,7 +7,7 @@ import (
 
 func GetUserId(request *restful.Request) string {
 	for k, v := range request.Request.Header {
-        fmt.Fprintf(w, "Header field %q, Value %q\n", k, v)
+        fmt.Printf("Header field %q, Value %q\n", k, v)
     }
 	return request.Request.Header.Get("HF-User-Id")
 }
