@@ -46,5 +46,9 @@ go build -o hf main.go
 ## 启动
 
 ```bash
-docker container run -d --name growing-iot --hostname growing-iot -p 8080:8080 -v /home/wales/growing_iot/:/growing -w /growing alpine:3.21 ./main
+docker container run -d --name growing-iot --hostname growing-iot \
+  -p 8090:8090 \
+  -v /home/wales/growing_iot/Offstage:/growing \
+  -w /growing \
+  alpine:3.21 ./hf
 ```

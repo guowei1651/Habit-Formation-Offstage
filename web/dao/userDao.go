@@ -21,12 +21,12 @@ func Login(username string, password string) (u *User, err error) {
 	var id string
 	var name string
 	var email string
-    row, err := db.DBConnectPool.QueryRow(`
+    row = db.DBConnectPool.QueryRow(`
 select u.id, u.username, u.email 
 from users u 
-where u.username = $1 and u."password" = md5(concat(u.slat, $2));`, username, password)
-    if err != nil {
-		log.Printf("失败了，失败原因为：", err)
+where u.username = "$1" and u."password" = md5(concat(u.slat, "$2"));`, username, password)
+    if row == nil {
+		log.Printf("没找到这个用户", err)
 		return nil, err
 	}
 
