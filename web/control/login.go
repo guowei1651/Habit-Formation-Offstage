@@ -47,7 +47,7 @@ func (u *LoginResource) Login(request *restful.Request, response *restful.Respon
 	respBody.Code = 0
 	respBody.Message = "success"
 	respBody.Data = loginInfo
-	response.WriteHeaderAndEntity(http.StatusCreated, usr)
+	response.WriteHeaderAndEntity(http.StatusCreated, respBody)
 }
 
 func (loginResource *LoginResource) LoadRoute(ws *restful.WebService) {
