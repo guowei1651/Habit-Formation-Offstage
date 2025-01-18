@@ -7,13 +7,13 @@ import (
 )
 
 type Carousel struct {
-	ID int
-	Name string
-	Description string
-	OwnerId int
-	BrownserUrl string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID          int     `json:"id" description:"Carousel id"`
+	Name        string  `json:"name" description:"Carousel name"`
+	Description string  `json:"description" description:"Carousel Description"`
+	OwnerId     int     `json:"ownerId" description:"Carousel owner user id"`
+	BrownserUrl string  `json:"brownserUrl" description:"Carousel brownser URL"`
+	CreatedAt   time.Time   `json:"createAt" description:"Carousel create At"`
+	UpdatedAt   time.Time   `json:"updatedAt" description:"Carousel update At"`
 }
 
 func FindAllCarouselByOwnerId(ownerId int) ([]Carousel, error) {
