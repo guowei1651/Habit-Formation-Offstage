@@ -22,7 +22,7 @@ func Login(username string, password string) (u *User, err error) {
 	var id string
 	var name string
 	var email string
-	sql := fmt.SPrintf(`
+	sql := fmt.Sprintf(`
 select u.id, u.username, u.email 
 from users u 
 where u.username = '%s' and u."password" = md5(concat(u.slat, '%s'));`, username, password)
