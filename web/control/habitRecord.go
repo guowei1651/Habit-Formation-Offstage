@@ -66,7 +66,7 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 func (h *HabitRecordResource) LoadRoute(ws *restful.WebService) {
 	tags := []string{"hf"}
 
-	ws.Route(ws.GET("{id}/record").To(h.Record).
+	ws.Route(ws.POST("{id}/record").To(h.Record).
 		// docs
 		Doc("Habit execution record").
 		Param(ws.PathParameter("id", "identifier of the habit").DataType("integer").DefaultValue("0")).

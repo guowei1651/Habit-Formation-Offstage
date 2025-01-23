@@ -17,8 +17,8 @@ func (ha *HabbitApplication)LoadRoute() (*restful.WebService) {
 		Consumes(restful.MIME_JSON).
 		Produces(restful.MIME_JSON)
 
-	loginResource := control.HabitRecordResource{}
-	loginResource.LoadRoute(ws)
+	habitRecordResource := control.HabitRecordResource{}
+	habitRecordResource.LoadRoute(ws)
 	
 	return ws
 }
