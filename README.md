@@ -89,10 +89,5 @@ curl 'http://172.25.1.22:8090/carousels/1/items' -X GET \
 curl 'http://172.25.1.22:8090/habit/1/record' -X GET \
   -H 'HF-User-Id: xxxxxx' \
   -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8' \
-  --data-raw '{"username": "xxxxx", "password": "xxxxxx"}'
+  --data-raw '{ "type": 3, "serial" : "browser", "serial": "",  "remark": "" }'
 ```
-
-curl 'http://172.25.1.22:8090/habit/1/record' -X POST \
-  -H 'HF-User-Id: 1' \
-  -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8' \
-  --data-raw '{ "type": 3, "device" : "browser", "serial": "",  "remark": "" }'
