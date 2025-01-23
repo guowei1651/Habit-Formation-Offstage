@@ -53,6 +53,12 @@ docker container run -d --name growing-iot --hostname growing-iot \
   alpine:3.21 ./hf
 ```
 
+docker container run -it --name growing-iot --hostname growing-iot \
+  -p 8090:8090 \
+  -v /home/wales/growing_iot/Offstage:/growing \
+  -w /growing \
+  alpine:3.21 sh
+
 ## 测试
 
 1. 登录测试

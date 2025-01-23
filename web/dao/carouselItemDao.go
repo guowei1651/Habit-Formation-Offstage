@@ -9,6 +9,7 @@ import (
 type CarouselItem struct {
 	Order		int    	`json:"order" description:"Carousel Item on carousel order" default:"1"`
 	Genus		string 	`json:"type" description:"type of the CarouselItem" default:"image"`
+    RelationsId string  `json:"relations_id" description:"relations_id of the CarouselItem" default:"0"`
 	AlertLevel  string	`json:"alert_level" description:"alert_level of the CarouselItem" default:"norme"`
 	TriggerTime string	`json:"trigger_time" description:"trigger_time of the CarouselItem" default:""`
 	Duration	int 	`json:"duration" description:"duration of the CarouselItem" default:"30"`
@@ -18,8 +19,8 @@ type CarouselItem struct {
 func FindAllCarouselItemsByCarouselId(carouselId int) ([]CarouselItem, error) {
     log.Printf("sqlSelectAllCarouselItemsByCarouselId param->", carouselId)
     rows, err := db.DBConnectPool.Query(`
-SELECT carousel_item.order, carousel_item.type, carousel_item.alert_level, carousel_item.trigger_time, 
-        carousel_item.duration, carousel_item.chart_url
+SELECT carousel_item.order, carousel_item.type, carousel_item.relations_id, carousel_item.alert_level,
+        carousel_item.trigger_time, carousel_item.duration, carousel_item.chart_url
 FROM carousel_item 
 WHERE carousel_id = $1 AND delete_flag = FALSE ORDER BY carousel_item.order;`, carouselId)
     if err != nil {
@@ -34,17 +35,19 @@ WHERE carousel_id = $1 AND delete_flag = FALSE ORDER BY carousel_item.order;`, c
         var ci CarouselItem
         var order string
         var genus string
+        var relationsId string
         var alertLevel string
         var triggerTime string
         var duration string
         var chartUrl string
-        if err := rows.Scan(&order, &genus, &alertLevel, &triggerTime, &duration, &chartUrl); err != nil {
+        if err := rows.Scan(&order, &genus, &relationsId, &alertLevel, &triggerTime, &duration, &chartUrl); err != nil {
             log.Fatal("db row next error. err->", err)
             return carouselItems, err
         }
         log.Printf("row ->", order, genus, duration, chartUrl)
         ci.Order, _ = strconv.Atoi(order)
         ci.Genus = genus
+        ci.RelationsId = relationsId
         ci.AlertLevel = alertLevel
         ci.TriggerTime = triggerTime
         ci.Duration, _ = strconv.Atoi(duration)
