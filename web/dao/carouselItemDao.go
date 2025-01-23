@@ -46,7 +46,7 @@ WHERE carousel_id = $1 AND delete_flag = FALSE ORDER BY carousel_item.order;`, c
         ci.Order, _ = strconv.Atoi(order)
         ci.Genus = genus
         ci.AlertLevel = alertLevel
-        ci.triggerTime = triggerTime
+        ci.TriggerTime = triggerTime
         ci.Duration, _ = strconv.Atoi(duration)
         ci.ChartUrl = chartUrl
         carouselItems = append(carouselItems, ci)
