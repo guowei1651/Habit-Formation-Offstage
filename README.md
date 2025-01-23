@@ -83,3 +83,11 @@ curl 'http://172.25.1.22:8090/carousels/1/items' -X GET \
   -H 'HF-User-Id: xxxxxx' \
   -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8'
 ```
+
+4. 习惯计数
+```bash
+curl 'http://172.25.1.22:8090/habit/1/record' -X GET \
+  -H 'HF-User-Id: xxxxxx' \
+  -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8' \
+  --data-raw '{"username": "xxxxx", "password": "xxxxxx"}'
+```
