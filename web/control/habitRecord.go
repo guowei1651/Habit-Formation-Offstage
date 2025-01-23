@@ -3,7 +3,6 @@ package control
 import (
 	"log"
 	"net/http"
-	"time"
 	
 	common "hf/web/common"
 	service "hf/web/service"
@@ -23,10 +22,10 @@ type HabitRecordResource struct {
 }
 
 // POST http://localhost:8080/habit/${id}/record
-func (h *HabitRecordResource) record(request *restful.Request, response *restful.Response) {
+func (h *HabitRecordResource) Record(request *restful.Request, response *restful.Response) {
 	log.Println("User Login")
 	habitRecord := HabitRecordVO{}
-	if err := request.ReadEntity(&HabitRecord); err != nil {
+	if err := request.ReadEntity(&habitRecord); err != nil {
 		response.WriteError(http.StatusInternalServerError, err)
 		return
 	}
@@ -37,7 +36,7 @@ func (h *HabitRecordResource) record(request *restful.Request, response *restful
 		return
 	}
 
-	err := service.record(habitRecord.Type, habitRecord.RelationsId, habitRecord.Serial, habitRecord.Remark)
+	err := service.Record(habitRecord.Type, habitRecord.RelationsId, habitRecord.Serial, habitRecord.Remark)
 	if (err != nil) {
 		respBody.Code = -1
 		respBody.Message = err.Error()
@@ -55,7 +54,7 @@ func (h *HabitRecordResource) record(request *restful.Request, response *restful
 func (h *HabitRecordResource) LoadRoute(ws *restful.WebService) {
 	tags := []string{"hf"}
 
-	ws.Route(ws.GET("{id}/record").To(carouselItemResource.FindAllCarouselItemsByCarouseId).
+	ws.Route(ws.GET("{id}/record").To(h.Record).
 		// docs
 		Doc("Habit execution record").
 		Param(ws.PathParameter("id", "identifier of the habit").DataType("integer").DefaultValue("0")).
