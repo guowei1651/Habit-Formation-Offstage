@@ -28,7 +28,7 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 	habitRecord := HabitRecordVO{}
 
 	habitId := request.PathParameter("id")
-	id, err := strconv.Atoi(habitId)
+	id, err := strconv.strconv.ParseInt(habitId, 10, 64);
 	if err != nil || id == 0 {
 		log.Printf("Record param error id->", id)
 		response.WriteErrorString(http.StatusNotFound, "record habit params error.")
