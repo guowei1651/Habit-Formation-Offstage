@@ -40,4 +40,5 @@ func Record(Type int64, RelationsId int64, Serial string, Remark string) (error)
 		log.Fatal(err)
 		return err
 	}
+	return nil
 }
