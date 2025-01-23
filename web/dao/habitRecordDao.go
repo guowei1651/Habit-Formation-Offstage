@@ -27,7 +27,7 @@ func Record(Type int64, RelationsId int64, Serial string, Remark string) (error)
 		return err
 	}
 
-	_, err = tx.ExecContext(ctx, `INSERT INTO habit_raw_records ("type",relations_id,serial,remark) VALUES (?,?,'?','?');`, 
+	_, err = tx.ExecContext(ctx, `INSERT INTO habit_raw_records ("type",relations_id,serial,remark) VALUES ($1,$2,'$3','$4');`, 
 			Type, RelationsId, Serial, Remark)
 	if err != nil {
 		if rollbackErr := tx.Rollback(); rollbackErr != nil {
