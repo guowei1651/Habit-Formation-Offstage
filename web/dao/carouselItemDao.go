@@ -2,7 +2,6 @@ package dao
 
 import (
     "log"
-    "strconv"
     "database/sql"
     db "hf/database"
 )
@@ -53,13 +52,13 @@ WHERE carousel_id = $1 AND delete_flag = FALSE ORDER BY carousel_item.order;`, c
             return carouselItems, err
         }
         log.Printf("row ->", order, genus, duration, chartUrl)
-        ci.Order = getValue(order.Valid, order.value, 0)
-        ci.Genus = getValue(genus.Valid, genus.value, "0")
-        ci.RelationsId = getValue(relationsId.Valid, relationsId.value, 0)
-        ci.AlertLevel = getValue(alertLevel.Valid, alertLevel.value, "0")
-        ci.TriggerTime = getValue(triggerTime.Valid, triggerTime.value, "")
-        ci.Duration = getValue(duration.Valid, duration.value, 0)
-        ci.ChartUrl = getValue(chartUrl.Valid, chartUrl.value, "")
+        ci.Order = getValue(order.Valid, order.Value, 0)
+        ci.Genus = getValue(genus.Valid, genus.Value, "0")
+        ci.RelationsId = getValue(relationsId.Valid, relationsId.Value, 0)
+        ci.AlertLevel = getValue(alertLevel.Valid, alertLevel.Value, "0")
+        ci.TriggerTime = getValue(triggerTime.Valid, triggerTime.Value, "")
+        ci.Duration = getValue(duration.Valid, duration.Value, 0)
+        ci.ChartUrl = getValue(chartUrl.Valid, chartUrl.Value, "")
         carouselItems = append(carouselItems, ci)
     }
     if err = rows.Err(); err != nil {
