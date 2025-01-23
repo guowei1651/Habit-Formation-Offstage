@@ -48,10 +48,10 @@ WHERE carousel_id = $1 AND delete_flag = FALSE ORDER BY carousel_item.order;`, c
         if (order.Valid) { tmp, _ := order.Value(); ci.Order = tmp.(int) } else { ci.Order = 0 }
         if (genus.Valid) { tmp, _ := genus.Value(); ci.Genus = tmp.(string) } else{ ci.Genus = "0" }
         if (relationsId.Valid) { tmp, _ := relationsId.Value(); ci.RelationsId = tmp.(int) } else{ ci.RelationsId = 0 }
-        if (alertLevel.Valid) { tmp, _ := alertLevel.Value(); ci.AlertLevel = alertLevel.(string) } else{ ci.AlertLevel = "0" }
-        if (triggerTime.Valid) { tmp, _ := triggerTime.Value(); ci.TriggerTime = triggerTime.(string) } else{ ci.TriggerTime = "" }
-        if (duration.Valid) { tmp, _ := duration.Value(); ci.Duration = duration.(int) } else{ ci.Duration = 0 }
-        if (chartUrl.Valid) { tmp, _ := chartUrl.Value(); ci.ChartUrl = chartUrl.(string) } else{ ci.ChartUrl = "" }
+        if (alertLevel.Valid) { tmp, _ := alertLevel.Value(); ci.AlertLevel = tmp.(string) } else{ ci.AlertLevel = "0" }
+        if (triggerTime.Valid) { tmp, _ := triggerTime.Value(); ci.TriggerTime = tmp.(string) } else{ ci.TriggerTime = "" }
+        if (duration.Valid) { tmp, _ := duration.Value(); ci.Duration = tmp.(int) } else{ ci.Duration = 0 }
+        if (chartUrl.Valid) { tmp, _ := chartUrl.Value(); ci.ChartUrl = tmp.(string) } else{ ci.ChartUrl = "" }
         carouselItems = append(carouselItems, ci)
     }
     if err = rows.Err(); err != nil {
