@@ -39,7 +39,7 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 		response.WriteError(http.StatusInternalServerError, err)
 		return
 	}
-	habitRecord.RelationsId = id.(int64)
+	habitRecord.RelationsId = id
 	log.Printf("habitRecord ->", habitRecord)
 
 	// 轮播项的类型。1：代表美图，2：代表提醒，3：代表习惯，4：代表长日程
@@ -49,7 +49,7 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 	}
 
 	respBody := common.ResponseBody{}
-	err := service.Record(habitRecord.Type, habitRecord.RelationsId, habitRecord.Serial, habitRecord.Remark)
+	err = service.Record(habitRecord.Type, habitRecord.RelationsId, habitRecord.Serial, habitRecord.Remark)
 	if (err != nil) {
 		respBody.Code = -1
 		respBody.Message = err.Error()
