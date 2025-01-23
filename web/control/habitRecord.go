@@ -47,7 +47,6 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 		return
 	}
 	habitRecord.RelationsId = id
-	log.Printf("habitRecord ->", habitRecord)
 
 	// 轮播项的类型。1：代表美图，2：代表提醒，3：代表习惯，4：代表长日程
 	if !(habitRecord.Type >= 1 && habitRecord.Type <= 4) {
