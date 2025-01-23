@@ -22,6 +22,9 @@ func (webServer WebServer) LoadWebService() {
 
 	ua := app.UserApplication{}
 	restful.DefaultContainer.Add(ua.LoadRoute())
+
+	ha := app.HabbitApplication{}
+	restful.DefaultContainer.Add(ha.LoadRoute())
 }
 
 func enrichSwaggerObject(swo *spec.Swagger) {
