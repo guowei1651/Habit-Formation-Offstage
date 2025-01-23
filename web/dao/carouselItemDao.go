@@ -46,13 +46,13 @@ WHERE carousel_id = $1 AND delete_flag = FALSE ORDER BY carousel_item.order;`, c
             return carouselItems, err
         }
         log.Printf("row ->", order, genus, duration, chartUrl)
-        ci.Order = (order.Valid ? order.value : 0)
-        ci.Genus = (genus.Valid ? genus.value : "0")
-        ci.RelationsId = (relationsId.Valid ? relationsId.value : 0)
-        ci.AlertLevel = (alertLevel.Valid ? alertLevel.value : "0")
-        ci.TriggerTime = (triggerTime.Valid ? triggerTime.value : "")
-        ci.Duration = (duration.Valid ? duration.value : 0)
-        ci.ChartUrl = (chartUrl.Valid ? chartUrl.value : "")
+        ci.Order = (order.Valid? order.value : 0)
+        ci.Genus = (genus.Valid? genus.value : "0")
+        ci.RelationsId = (relationsId.Valid? relationsId.value : 0)
+        ci.AlertLevel = (alertLevel.Valid? alertLevel.value : "0")
+        ci.TriggerTime = (triggerTime.Valid? triggerTime.value : "")
+        ci.Duration = (duration.Valid? duration.value : 0)
+        ci.ChartUrl = (chartUrl.Valid? chartUrl.value : "")
         carouselItems = append(carouselItems, ci)
     }
     if err = rows.Err(); err != nil {
