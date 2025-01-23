@@ -2,6 +2,7 @@ package control
 
 import (
 	"log"
+	"strconv"
 	"net/http"
 	
 	common "hf/web/common"
@@ -34,7 +35,7 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 		return
 	}
 
-	if err := request.ReadEntity(&habitRecord); err != nil {
+	if err = request.ReadEntity(&habitRecord); err != nil {
 		response.WriteError(http.StatusInternalServerError, err)
 		return
 	}
