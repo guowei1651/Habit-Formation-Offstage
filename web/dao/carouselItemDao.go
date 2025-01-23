@@ -34,15 +34,19 @@ WHERE carousel_id = $1 AND delete_flag = FALSE ORDER BY carousel_item.order;`, c
         var ci CarouselItem
         var order string
         var genus string
+        var alertLevel string
+        var triggerTime string
         var duration string
         var chartUrl string
-        if err := rows.Scan(&order, &genus, &duration, &chartUrl); err != nil {
+        if err := rows.Scan(&order, &genus, &alertLevel, &triggerTime, &duration, &chartUrl); err != nil {
             log.Fatal("db row next error. err->", err)
             return carouselItems, err
         }
         log.Printf("row ->", order, genus, duration, chartUrl)
         ci.Order, _ = strconv.Atoi(order)
         ci.Genus = genus
+        ci.AlertLevel = alertLevel
+        ci.triggerTime = triggerTime
         ci.Duration, _ = strconv.Atoi(duration)
         ci.ChartUrl = chartUrl
         carouselItems = append(carouselItems, ci)
