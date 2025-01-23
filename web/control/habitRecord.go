@@ -36,6 +36,7 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 		return
 	}
 
+	respBody := common.ResponseBody{}
 	err := service.Record(habitRecord.Type, habitRecord.RelationsId, habitRecord.Serial, habitRecord.Remark)
 	if (err != nil) {
 		respBody.Code = -1
@@ -44,7 +45,6 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 		return
 	}
 
-	respBody := common.ResponseBody{}
 	respBody.Code = 0
 	respBody.Message = "success"
 	
