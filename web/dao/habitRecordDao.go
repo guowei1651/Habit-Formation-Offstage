@@ -2,6 +2,7 @@ package dao
 
 import (
 	"log"
+	"time"
 
 	"context"
 	"database/sql"
@@ -17,7 +18,7 @@ type HabitRecord struct {
 }
 
 func Record(Type int64, RelationsId int64, Serial string, Remark string) (error) {
-	ctx, cancel := context.WithTimeout(r.Context(), 3*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
 	tx, err := db.DBConnectPool.BeginTx(ctx, &sql.TxOptions{Isolation: sql.LevelSerializable})
