@@ -91,3 +91,8 @@ curl 'http://172.25.1.22:8090/habit/1/record' -X GET \
   -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8' \
   --data-raw '{"username": "xxxxx", "password": "xxxxxx"}'
 ```
+
+curl 'http://172.25.1.22:8090/habit/1/record' -X POST \
+  -H 'HF-User-Id: 1' \
+  -H 'Accept: */*' -H 'Content-Type: application/json;charset=UTF-8' \
+  --data-raw '{ "type": 3, "device" : "browser", "serial": "",  "remark": "" }'

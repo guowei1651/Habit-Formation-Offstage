@@ -13,7 +13,7 @@ type HabbitApplication struct {
 func (ha *HabbitApplication)LoadRoute() (*restful.WebService) {
 	ws := new(restful.WebService)
 	ws.
-		Path("/habit").
+		Path("/habits").
 		Consumes(restful.MIME_JSON).
 		Produces(restful.MIME_JSON)
 

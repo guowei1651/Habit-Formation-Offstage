@@ -23,12 +23,23 @@ type HabitRecordResource struct {
 
 // POST http://localhost:8080/habit/${id}/record
 func (h *HabitRecordResource) Record(request *restful.Request, response *restful.Response) {
-	log.Println("User Login")
+	log.Println("habit record")
 	habitRecord := HabitRecordVO{}
+
+	habitId := request.PathParameter("id")
+	id, err := strconv.Atoi(habitId)
+	if err != nil || id == 0 {
+		log.Printf("Record param error id->", id)
+		response.WriteErrorString(http.StatusNotFound, "record habit params error.")
+		return
+	}
+
 	if err := request.ReadEntity(&habitRecord); err != nil {
 		response.WriteError(http.StatusInternalServerError, err)
 		return
 	}
+	habitRecord.RelationsId = id.(int64)
+	log.Printf("habitRecord ->", habitRecord)
 
 	// 轮播项的类型。1：代表美图，2：代表提醒，3：代表习惯，4：代表长日程
 	if (habitRecord.Type == 1 || habitRecord.Type == 2 || habitRecord.Type == 3 || habitRecord.Type == 4) {
