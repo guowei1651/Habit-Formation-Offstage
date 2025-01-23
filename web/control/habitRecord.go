@@ -6,6 +6,7 @@ import (
 	"net/http"
 	
 	common "hf/web/common"
+	utils "hf/web/utils"
 	service "hf/web/service"
 
 	restful "github.com/emicklei/go-restful/v3"
@@ -25,6 +26,12 @@ type HabitRecordResource struct {
 // POST http://localhost:8080/habit/${id}/record
 func (h *HabitRecordResource) Record(request *restful.Request, response *restful.Response) {
 	log.Println("habit record")
+	userId := utils.GetUserId(request)
+	if len(userId) == 0 {
+		response.WriteErrorString(http.StatusNotFound, "plases login")
+		return
+	}
+
 	habitRecord := HabitRecordVO{}
 
 	habitId := request.PathParameter("id")
@@ -43,7 +50,7 @@ func (h *HabitRecordResource) Record(request *restful.Request, response *restful
 	log.Printf("habitRecord ->", habitRecord)
 
 	// 轮播项的类型。1：代表美图，2：代表提醒，3：代表习惯，4：代表长日程
-	if (habitRecord.Type == 1 || habitRecord.Type == 2 || habitRecord.Type == 3 || habitRecord.Type == 4) {
+	if !(habitRecord.Type >= 1 && habitRecord.Type <= 4) {
 		response.WriteErrorString(http.StatusInternalServerError, "不支持的类型")
 		return
 	}
