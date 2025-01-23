@@ -27,18 +27,18 @@ func Record(Type int64, RelationsId int64, Serial string, Remark string) (error)
 		return err
 	}
 
-	_, err = tx.ExecContext(ctx, "INSERT INTO appsmith.habit_raw_records (\"type\",relations_id,serial,remark) VALUES (?,?,'?','?');", 
+	_, err = tx.ExecContext(ctx, "INSERT INTO habit_raw_records (\"type\",relations_id,serial,remark) VALUES (?,?,'?','?');", 
 			Type, RelationsId, Serial, Remark)
 	if err != nil {
 		if rollbackErr := tx.Rollback(); rollbackErr != nil {
 			log.Fatalf("insert drivers: unable to rollback: %v", rollbackErr)
 		}
-		log.Fatal(err)
+		log.Fatalf("ExecContext error: %v", err)
 		return err
 	}
 
 	if err := tx.Commit(); err != nil {
-		log.Fatal(err)
+		log.Fatalf("Commit error: %v", err)
 		return err
 	}
 	return nil
