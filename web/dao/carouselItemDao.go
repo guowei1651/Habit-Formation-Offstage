@@ -17,7 +17,7 @@ type CarouselItem struct {
 	ChartUrl	string 	`json:"chartUrl" description:"chartUrl of the CarouselItem" default:""`
 }
 
-func getValue(expr bool, a, b interface{}) interface{} {
+func getValue[T any](expr bool, a, b T) T {
 	if expr {
 		return a
 	}
